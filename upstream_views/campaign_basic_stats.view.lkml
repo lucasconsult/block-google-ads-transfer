@@ -1,5 +1,5 @@
 view: campaign_basic_stats {
-  sql_table_name: `@{GOOGLE_ADS_CUSTOMER_ID}.CampaignBasicStats_@{GOOGLE_ADS_CUSTOMER_ID}`    ;;
+  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.CampaignBasicStats_@{GOOGLE_ADS_CUSTOMER_ID}`    ;;
 
   dimension_group: _data {
     type: time
