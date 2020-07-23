@@ -1,10 +1,9 @@
 - dashboard: google_ads_conversions
   title: Google Ads - Conversions
-  extends: block_google_ads_base
   elements:
   - title: Conversions To Date
     name: Conversions To Date
-    model: block_google_ads_transfer
+
     explore: period_fact
     type: looker_column
     fields: [fact.date_period_dynamic_grain, fact.total_conversions, fact.average_cost_per_conversion,
@@ -93,7 +92,7 @@
     height: 11
   - title: Conversions by Day of Week
     name: Conversions by Day of Week
-    model: block_google_ads_transfer
+
     explore: period_fact
     type: looker_bar
     fields: [fact.date_day_of_week, fact.total_conversions]
@@ -172,7 +171,7 @@
     height: 7
   - title: Conversions by Hour of Day
     name: Conversions by Hour of Day
-    model: block_google_ads_transfer
+
     explore: ad_impressions_ad_group_hour
     type: looker_column
     fields: [fact.total_conversions, fact.hour_of_day]
@@ -250,7 +249,7 @@
     height: 7
   - title: Creative Conversions Change
     name: Creative Conversions Change
-    model: block_google_ads_transfer
+
     explore: period_fact
     type: looker_bar
     fields: [campaign.name, ad_group.ad_group_name, ad.creative, fact.total_cost,
@@ -317,7 +316,7 @@
     height: 7
   - title: Landing Pages Conversions Change
     name: Landing Pages Conversions Change
-    model: block_google_ads_transfer
+
     explore: period_fact
     type: looker_bar
     fields: [campaign.name, ad_group.ad_group_name, ad.creative_final_urls_domain_path,
@@ -384,7 +383,7 @@
     height: 7
   - title: Ad Group Conversions Change
     name: Ad Group Conversions Change
-    model: block_google_ads_transfer
+
     explore: period_fact
     type: looker_bar
     fields: [campaign.name, ad_group.ad_group_name, keyword.criteria, fact.total_cost,
@@ -443,7 +442,7 @@
     height: 14
   - title: Conversions by Network
     name: Conversions by Network
-    model: block_google_ads_transfer
+
     explore: ad_impressions_ad_group
     type: looker_bar
     fields: [fact.ad_network_type, fact.total_conversions]
@@ -502,7 +501,7 @@
     height: 6
   - title: Conversions by Device
     name: Conversions by Device
-    model: block_google_ads_transfer
+
     explore: ad_impressions_ad_group
     type: looker_bar
     fields: [fact.total_conversions, fact.device_type]
@@ -565,7 +564,7 @@
     height: 6
   - title: Conversions by Bid Strategy
     name: Conversions by Bid Strategy
-    model: block_google_ads_transfer
+
     explore: ad_impressions_keyword
     type: looker_bar
     fields: [fact.total_conversions, keyword.bidding_strategy_type]
@@ -628,7 +627,7 @@
     height: 6
   - title: Conversions by Day of Week and Hour of Day
     name: Conversions by Day of Week and Hour of Day
-    model: block_google_ads_transfer
+
     explore: ad_impressions_ad_group_hour
     type: looker_grid
     fields: [fact.total_conversions, fact.hour_of_day, fact.date_day_of_week]

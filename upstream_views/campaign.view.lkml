@@ -1,8 +1,9 @@
 view: campaign {
-  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Campaign_@{GOOGLE_ADS_CUSTOMER_ID}`
-    ;;
+  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Campaign_@{GOOGLE_ADS_CUSTOMER_ID}` ;;
+
 
   dimension_group: _data {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -18,6 +19,7 @@ view: campaign {
   }
 
   dimension_group: _latest {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -32,19 +34,30 @@ view: campaign {
     sql: ${TABLE}._LATEST_DATE ;;
   }
 
+  dimension: latest {
+    hidden: yes
+    type: yesno
+    sql: ${_data_raw} = ${_latest_raw} ;;
+  }
+
+
   dimension: advertising_channel_sub_type {
+    group_label: "Campaign Attributes"
+    description: "Optional refinement of the campaign's AdvertisingChannelType."
     type: string
     sql: ${TABLE}.AdvertisingChannelSubType ;;
   }
 
   dimension: advertising_channel_type {
+    group_label: "Campaign Attributes"
     type: string
     sql: ${TABLE}.AdvertisingChannelType ;;
   }
 
   dimension: amount {
+    description: "The daily budget amount"
     type: number
-    sql: ${TABLE}.Amount ;;
+    sql: ${TABLE}.Amount / 10000 ;;
   }
 
   dimension: bid_type {
@@ -93,6 +106,7 @@ view: campaign {
   }
 
   dimension: campaign_name {
+    alias: [name]
     type: string
     sql: ${TABLE}.CampaignName ;;
   }
@@ -113,6 +127,7 @@ view: campaign {
   }
 
   dimension_group: end {
+    description: "the end date of the campaign"
     type: time
     timeframes: [
       raw,
@@ -183,6 +198,7 @@ view: campaign {
   }
 
   dimension_group: start {
+    description: "the start date of the campaign"
     type: time
     timeframes: [
       raw,

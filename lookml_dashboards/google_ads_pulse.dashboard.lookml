@@ -1,0 +1,1 @@
+- dashboard: google_ads_pulse

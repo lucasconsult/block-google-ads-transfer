@@ -1,7 +1,17 @@
-view: campaign_basic_stats {
-  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.CampaignBasicStats_@{GOOGLE_ADS_CUSTOMER_ID}`    ;;
+include: /shared_views/*
+
+view: ad_basic_stats {
+  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.AdBasicStats_@{GOOGLE_ADS_CUSTOMER_ID}`    ;;
+  extends: [ads_common,date_base,period_base]
+
+  dimension: _date {
+    hidden: yes
+    type: date_raw
+    sql: ${TABLE}._DATA_DATE ;;
+  }
 
   dimension_group: _data {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -17,6 +27,7 @@ view: campaign_basic_stats {
   }
 
   dimension_group: _latest {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -29,6 +40,12 @@ view: campaign_basic_stats {
     convert_tz: no
     datatype: date
     sql: ${TABLE}._LATEST_DATE ;;
+  }
+
+  dimension: latest {
+    hidden: yes
+    type: yesno
+    sql: ${_data_raw} = ${_latest_raw} ;;
   }
 
   dimension: active_view_impressions {
@@ -56,6 +73,11 @@ view: campaign_basic_stats {
     sql: ${TABLE}.ActiveViewViewability ;;
   }
 
+  dimension: ad_group_id {
+    type: number
+    sql: ${TABLE}.AdGroupId ;;
+  }
+
   dimension: ad_network_type1 {
     type: string
     sql: ${TABLE}.AdNetworkType1 ;;
@@ -71,14 +93,14 @@ view: campaign_basic_stats {
     sql: ${TABLE}.AveragePosition ;;
   }
 
+  dimension: base_ad_group_id {
+    type: number
+    sql: ${TABLE}.BaseAdGroupId ;;
+  }
+
   dimension: base_campaign_id {
     type: number
     sql: ${TABLE}.BaseCampaignId ;;
-  }
-
-  dimension: campaign_group_id {
-    type: number
-    sql: ${TABLE}.CampaignGroupId ;;
   }
 
   dimension: campaign_id {
@@ -101,9 +123,24 @@ view: campaign_basic_stats {
     sql: ${TABLE}.Conversions ;;
   }
 
-  measure: cost {
-    type: sum
+  dimension: cost {
+    type: number
     sql: ${TABLE}.Cost / 1000000 ;;
+  }
+
+  dimension: creative_id {
+    type: number
+    sql: ${TABLE}.CreativeId ;;
+  }
+
+  dimension: criterion_id {
+    type: number
+    sql: ${TABLE}.CriterionId ;;
+  }
+
+  dimension: criterion_type {
+    type: string
+    sql: ${TABLE}.CriterionType ;;
   }
 
   dimension_group: date {
@@ -113,6 +150,9 @@ view: campaign_basic_stats {
       date,
       week,
       month,
+      day_of_week_index,
+      day_of_month,
+      day_of_year,
       quarter,
       year
     ]
@@ -131,8 +171,8 @@ view: campaign_basic_stats {
     sql: ${TABLE}.ExternalCustomerId ;;
   }
 
-  measure: impressions {
-    type: sum
+  dimension: impressions {
+    type: number
     sql: ${TABLE}.Impressions ;;
   }
 
@@ -141,9 +181,14 @@ view: campaign_basic_stats {
     sql: ${TABLE}.InteractionTypes ;;
   }
 
-  measure: interactions {
-    type: sum
+  dimension: interactions {
+    type: number
     sql: ${TABLE}.Interactions ;;
+  }
+
+  dimension: is_negative {
+    type: yesno
+    sql: ${TABLE}.IsNegative ;;
   }
 
   dimension: slot {

@@ -1,13 +1,81 @@
 connection: "@{CONNECTION_NAME}"
 
 include: "upstream_views/*"
+#include: "lookml_dashboards/*"
+include: "lookml_dashboards/google_ads_pulse.dashboard"
 
-explore: campaign {
-  join: campaign_basic_stats {
-    sql_on: ${campaign.campaign_id} = ${campaign_basic_stats.campaign_id} ;;
-    relationship: one_to_many
+
+explore: ad_basic_stats {
+  view_label: "Ad Performance (Current Period)"
+  description: "Ad Performance including Ad Groups, Keywords and Campaigns"
+  view_name: fact
+  from: ad_basic_stats
+
+
+  join: last_fact {
+    from: ad_basic_stats
+    view_label: "Ad Performance (Last Period)"
+    sql_on: ${fact.external_customer_id} = ${last_fact.external_customer_id} AND
+      ${fact.campaign_id} = ${last_fact.campaign_id} AND
+      ${fact.ad_group_id} = ${last_fact.ad_group_id} AND
+      ${fact.criterion_id} = ${last_fact.criterion_id} AND
+      ${fact.creative_id} = ${last_fact.creative_id} AND
+      ${fact.date_last_period} = ${last_fact.date_period} AND
+      ${fact.date_day_of_period} = ${last_fact.date_day_of_period} ;;
+    relationship: one_to_one
+  }
+
+  join: ad {
+    from: ad
+    view_label: "Ads"
+    sql_on: ${fact.creative_id} = ${ad.creative_id} AND
+      ${fact.ad_group_id} = ${ad.ad_group_id} AND
+      ${fact.campaign_id} = ${ad.campaign_id} AND
+      ${fact.external_customer_id} = ${ad.external_customer_id} AND
+      ${ad.latest} ;;
+    relationship:  many_to_one
+  }
+
+  join: ad_group {
+    fields: [ad_group.ad_group_name]
+    from: ad_group
+    view_label: "Ad Groups"
+    sql_on: ${fact.ad_group_id} = ${ad_group.ad_group_id} AND
+      ${fact.campaign_id} = ${ad_group.campaign_id} AND
+      ${fact.external_customer_id} = ${ad_group.external_customer_id} AND
+      ${ad_group.latest} ;;
+    relationship: many_to_one
+  }
+
+  join: keyword {
+    fields: [keyword.criteria,keyword.criteria_destination_url]
+    from: keyword
+    view_label: "Keyword"
+    sql_on: ${fact.criterion_id} = ${keyword.criterion_id} AND
+            ${fact.ad_group_id} = ${keyword.ad_group_id} AND
+            ${fact.campaign_id} = ${keyword.campaign_id} AND
+            ${fact.external_customer_id} = ${keyword.external_customer_id} AND
+            ${keyword.latest} ;;
+    relationship: many_to_one
+  }
+
+  join: customer {
+    view_label: "Customer"
+    sql_on: ${fact.external_customer_id} = ${customer.external_customer_id} AND
+      ${customer.latest} ;;
+    relationship: many_to_one
+  }
+
+  join: campaign {
+    view_label: "Campaign"
+    sql_on: ${fact.campaign_id} = ${campaign.campaign_id} AND
+      ${fact.external_customer_id} = ${campaign.external_customer_id} AND
+      ${campaign.latest};;
+    relationship: many_to_one
   }
 }
+
+
 
 # include: "*.dashboard"
 # include: "*.view"

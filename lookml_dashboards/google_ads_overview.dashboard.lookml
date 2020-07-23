@@ -1,11 +1,10 @@
 - dashboard: google_ads_overview
   title: Google Ads Overview
-  extends: block_google_ads_base
   elements:
   - title: Conversion Trend
     name: Conversion Trend
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: looker_area
     fields: [fact.date_period_dynamic_grain, fact.average_cost_per_conversion, fact.average_conversion_rate,
       fact.total_conversions, fact.average_cost_per_click, fact.average_click_rate,
@@ -98,8 +97,8 @@
     height: 10
   - title: Click Trend
     name: Click Trend
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: looker_line
     fields: [fact.date_period_dynamic_grain, fact.average_cost_per_click, fact.average_click_rate,
       fact.total_clicks, fact.average_cost_per_conversion, fact.average_conversion_rate,
@@ -191,8 +190,8 @@
     height: 6
   - title: Campaigns
     name: Campaigns
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: table
     fields: [campaign.name, fact.weighted_average_position, fact.total_cost, fact.total_conversions,
       fact.average_cost_per_conversion, fact.average_conversion_rate, fact.average_cost_per_click,
@@ -249,8 +248,8 @@
     height: 6
   - title: Spend
     name: Spend
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: single_value
     fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
       last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
@@ -329,8 +328,8 @@
     height: 3
   - title: Conversions
     name: Conversions
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: single_value
     fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
       last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
@@ -409,8 +408,8 @@
     height: 3
   - title: Cost Per Conversion
     name: Cost Per Conversion
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: single_value
     fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
       last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
@@ -489,8 +488,8 @@
     height: 3
   - title: Conversion Rate
     name: Conversion Rate
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: single_value
     fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
       last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
@@ -569,8 +568,8 @@
     height: 3
   - title: Click Rate
     name: Click Rate
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: single_value
     fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
       last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
@@ -649,8 +648,8 @@
     height: 3
   - title: Per Click
     name: Per Click
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: single_value
     fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
       last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
@@ -729,8 +728,8 @@
     height: 3
   - title: Spend To Date
     name: Spend To Date
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: looker_area
     fields: [fact.date_day_of_period, fact.total_cost, fact.cumulative_spend, last_fact.total_cost,
       last_fact.cumulative_spend]
@@ -811,8 +810,8 @@
     height: 10
   - title: Funnel
     name: Funnel
-    model: block_google_ads_transfer
-    explore: period_fact
+
+    explore: ad_basic_stats
     type: looker_column
     fields: [fact.total_impressions, fact.total_clicks, fact.total_conversions, fact.date_period]
     sorts: [fact.date_period desc]

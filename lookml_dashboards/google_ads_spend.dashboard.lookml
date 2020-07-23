@@ -1,10 +1,9 @@
 - dashboard: google_ads_spend
   title: Google Ads - Spend
-  extends: block_google_ads_base
   elements:
   - title: Spend To Date
     name: Spend To Date
-    model: block_google_ads_transfer
+
     explore: period_fact
     type: looker_area
     fields: [fact.date_day_of_period, fact.total_cost, fact.cumulative_spend, last_fact.total_cost,
@@ -78,7 +77,7 @@
     height: 11
   - title: Budget Utilization
     name: Budget Utilization
-    model: block_google_ads_transfer
+
     explore: campaign_budget_date_fact
     type: looker_column
     fields: [fact.percent_used_budget_tier, fact.total_cost, fact.date_period_dynamic_grain]
@@ -146,7 +145,7 @@
     height: 11
   - title: Spend by Network
     name: Spend by Network
-    model: block_google_ads_transfer
+
     explore: ad_impressions_ad_group
     type: looker_bar
     fields: [fact.ad_network_type, fact.total_cost]
@@ -204,7 +203,7 @@
     height: 6
   - title: Spend by Device
     name: Spend by Device
-    model: block_google_ads_transfer
+
     explore: ad_impressions_ad_group
     type: looker_bar
     fields: [fact.total_cost, fact.device_type]
@@ -261,7 +260,7 @@
     height: 6
   - title: Spend by Bid Strategy
     name: Spend by Bid Strategy
-    model: block_google_ads_transfer
+
     explore: ad_impressions_keyword
     type: looker_bar
     fields: [fact.total_cost, keyword.bidding_strategy_type]
@@ -319,7 +318,7 @@
     height: 6
   - title: Spend by Day of Week
     name: Spend by Day of Week
-    model: block_google_ads_transfer
+
     explore: period_fact
     type: looker_bar
     fields: [fact.date_day_of_week, fact.total_cost]
@@ -404,7 +403,7 @@
     height: 6
   - title: Spend by Hour of Day
     name: Spend by Hour of Day
-    model: block_google_ads_transfer
+
     explore: ad_impressions_ad_group_hour
     type: looker_column
     fields: [fact.total_cost, fact.hour_of_day]
@@ -488,7 +487,7 @@
     height: 6
   - title: Ad Spend Change
     name: Ad Spend Change
-    model: block_google_ads_transfer
+
     explore: period_fact
     type: looker_bar
     fields: [campaign.name, ad_group.ad_group_name, ad.creative, last_fact.total_cost,
@@ -561,7 +560,7 @@
     height: 7
   - title: Landing Page Spend Change
     name: Landing Page Spend Change
-    model: block_google_ads_transfer
+
     explore: period_fact
     type: looker_bar
     fields: [campaign.name, ad_group.ad_group_name, ad.creative_final_urls_domain_path,
@@ -633,7 +632,7 @@
     height: 7
   - title: Keyword Spend Change
     name: Keyword Spend Change
-    model: block_google_ads_transfer
+
     explore: period_fact
     type: looker_column
     fields: [campaign.name, ad_group.ad_group_name, keyword.criteria, last_fact.total_cost,
@@ -705,7 +704,7 @@
     height: 14
   - title: Spend by Day of Week and Hour of Day
     name: Spend by Day of Week and Hour of Day
-    model: block_google_ads_transfer
+
     explore: ad_impressions_ad_group_hour
     type: looker_grid
     fields: [fact.total_cost, fact.hour_of_day, fact.date_day_of_week]
