@@ -11,18 +11,28 @@ explore: ad_basic_stats {
   view_name: fact
   from: ad_basic_stats
 
+  conditionally_filter: {
+    filters: [
+                fact.period: "28 day",
+                fact.date_period_latest: "yes"
+              ]
+    unless: [fact.date_date]
+  }
+
+
 
   join: last_fact {
     from: ad_basic_stats
     view_label: "Ad Performance (Last Period)"
-    sql_on: ${fact.external_customer_id} = ${last_fact.external_customer_id} AND
+    sql_on:
+      ${fact.external_customer_id} = ${last_fact.external_customer_id} AND
       ${fact.campaign_id} = ${last_fact.campaign_id} AND
       ${fact.ad_group_id} = ${last_fact.ad_group_id} AND
       ${fact.criterion_id} = ${last_fact.criterion_id} AND
       ${fact.creative_id} = ${last_fact.creative_id} AND
       ${fact.date_last_period} = ${last_fact.date_period} AND
       ${fact.date_day_of_period} = ${last_fact.date_day_of_period} ;;
-    relationship: one_to_one
+    relationship: many_to_many
   }
 
   join: ad {
@@ -73,7 +83,9 @@ explore: ad_basic_stats {
       ${campaign.latest};;
     relationship: many_to_one
   }
+
 }
+
 
 
 

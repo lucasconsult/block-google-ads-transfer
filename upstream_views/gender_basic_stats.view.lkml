@@ -1,14 +1,16 @@
 include: /shared_views/*
 
-view: ad_basic_stats {
-  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.AdBasicStats_@{GOOGLE_ADS_CUSTOMER_ID}`    ;;
+view: gender_basic_stats {
+  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.GenderBasicStats_@{GOOGLE_ADS_CUSTOMER_ID}`
+    ;;
+
   extends: [ads_common,date_base,period_base]
 
   dimension: primary_key {
     primary_key: yes
     hidden: no
     type: string
-    sql: CONCAT(${date_raw},${creative_id},${criterion_id},${campaign_id},${_data_raw},${_latest_raw},${ad_group_id},${device},${interaction_types},${slot}) ;;
+    sql: CONCAT(${date_raw},${criterion_id},${campaign_id},${_data_raw},${_latest_raw},${ad_group_id},${device},${interaction_types}) ;;
   }
 
   dimension: _date {
@@ -17,8 +19,8 @@ view: ad_basic_stats {
     sql: ${TABLE}._DATA_DATE ;;
   }
 
+
   dimension_group: _data {
-    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -34,7 +36,6 @@ view: ad_basic_stats {
   }
 
   dimension_group: _latest {
-    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -47,12 +48,6 @@ view: ad_basic_stats {
     convert_tz: no
     datatype: date
     sql: ${TABLE}._LATEST_DATE ;;
-  }
-
-  dimension: latest {
-    hidden: yes
-    type: yesno
-    sql: ${_data_raw} = ${_latest_raw} ;;
   }
 
   dimension: active_view_impressions {
@@ -95,9 +90,14 @@ view: ad_basic_stats {
     sql: ${TABLE}.AdNetworkType2 ;;
   }
 
-  dimension: average_position {
+  dimension: all_conversion_value {
     type: number
-    sql: ${TABLE}.AveragePosition ;;
+    sql: ${TABLE}.AllConversionValue ;;
+  }
+
+  dimension: all_conversions {
+    type: number
+    sql: ${TABLE}.AllConversions ;;
   }
 
   dimension: base_ad_group_id {
@@ -132,12 +132,7 @@ view: ad_basic_stats {
 
   dimension: cost {
     type: number
-    sql: ${TABLE}.Cost / 1000000.0 ;;
-  }
-
-  dimension: creative_id {
-    type: number
-    sql: ${TABLE}.CreativeId ;;
+    sql: ${TABLE}.Cost ;;
   }
 
   dimension: criterion_id {
@@ -145,9 +140,9 @@ view: ad_basic_stats {
     sql: ${TABLE}.CriterionId ;;
   }
 
-  dimension: criterion_type {
-    type: string
-    sql: ${TABLE}.CriterionType ;;
+  dimension: cross_device_conversions {
+    type: number
+    sql: ${TABLE}.CrossDeviceConversions ;;
   }
 
   dimension_group: date {
@@ -157,9 +152,6 @@ view: ad_basic_stats {
       date,
       week,
       month,
-      day_of_week_index,
-      day_of_month,
-      day_of_year,
       quarter,
       year
     ]
@@ -191,16 +183,6 @@ view: ad_basic_stats {
   dimension: interactions {
     type: number
     sql: ${TABLE}.Interactions ;;
-  }
-
-  dimension: is_negative {
-    type: yesno
-    sql: ${TABLE}.IsNegative ;;
-  }
-
-  dimension: slot {
-    type: string
-    sql: ${TABLE}.Slot ;;
   }
 
   dimension: view_through_conversions {
