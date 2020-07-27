@@ -1,750 +1,416 @@
-- dashboard: google_ads_overview
-  title: Google Ads Overview
+- dashboard: google_ads_pulse
+  title: Google Ads Pulse
+  layout: newspaper
+  preferred_viewer: dashboards-next
   elements:
-  - title: Conversion Trend
-    name: Conversion Trend
-    model: block_google_ads_transfer
-    explore: period_fact
-    type: looker_area
-    fields: [fact.date_period_dynamic_grain, fact.average_cost_per_conversion, fact.average_conversion_rate,
-      fact.total_conversions, fact.average_cost_per_click, fact.average_click_rate,
-      fact.total_clicks]
-    sorts: [fact.date_period_dynamic_grain]
-    limit: 500
-    column_limit: 50
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: false
-    show_x_axis_ticks: true
-    x_axis_scale: time
-    y_axis_scale_mode: linear
-    show_null_points: false
-    point_style: none
-    interpolation: linear
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    label: Average Cost per Conversion
-    ordering: none
-    show_null_labels: false
-    leftAxisLabelVisible: false
-    leftAxisLabel: ''
-    rightAxisLabelVisible: false
-    rightAxisLabel: ''
-    barColors: [red, blue]
-    smoothedBars: false
-    orientation: automatic
-    labelPosition: left
-    percentType: total
-    percentPosition: inline
-    valuePosition: right
-    labelColorEnabled: false
-    labelColor: "#FFF"
-    series_types:
-      fact.average_cost_per_conversion: line
-      fact.total_impressions: line
-      fact.total_clicks: line
-      fact.average_conversion_rate: line
-    show_dropoff: true
-    y_axes: [{label: '', maxValue: !!null '', minValue: !!null '', orientation: left,
-        showLabels: true, showValues: true, tickDensity: default, tickDensityCustom: !!null '',
-        type: linear, unpinAxis: false, valueFormat: "$0", series: [{id: fact.average_cost_per_conversion,
-            name: Cost per Conversion, __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-            __LINE_NUM: 185, axisId: fact.average_cost_per_conversion}], __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-        __LINE_NUM: 173}, {label: '', maxValue: !!null '', minValue: !!null '', orientation: right,
-        showLabels: true, showValues: true, tickDensity: default, tickDensityCustom: !!null '',
-        type: linear, unpinAxis: false, valueFormat: 0.0%, series: [{id: fact.average_conversion_rate,
-            name: Conversion Rate, axisId: fact.average_conversion_rate, __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-            __LINE_NUM: 204}], __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-        __LINE_NUM: 192}, {label: !!null '', maxValue: !!null '', minValue: !!null '',
-        orientation: right, showLabels: true, showValues: true, tickDensity: default,
-        tickDensityCustom: !!null '', type: linear, unpinAxis: false, valueFormat: '',
-        series: [{id: fact.total_conversions, name: Conversions, axisId: fact.total_conversions,
-            __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-            __LINE_NUM: 223}], __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-        __LINE_NUM: 211}]
-    discontinuous_nulls: false
-    focus_on_hover: false
-    reference_lines: []
-    colors: ["#7869df", "#6e98f9", "#8ac8ca", "#d06180", "#dc9d4f", "#4bb86a", "#a4a6a9",
-      "#a6b7ff", "#afe8fd", "#ea9895", "#f1e582"]
-    series_colors: {}
-    hidden_series: [fact.total_conversions, fact.average_conversion_rate]
-    series_labels:
-      fact.total_cost: Spend
-      fact.total_clicks: Clicks
-    hidden_fields: [fact.average_cost_per_click, fact.average_click_rate, fact.total_clicks]
-    listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
-      Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 3
-    col: 9
-    width: 15
-    height: 10
-  - title: Click Trend
-    name: Click Trend
-    model: block_google_ads_transfer
-    explore: period_fact
-    type: looker_line
-    fields: [fact.date_period_dynamic_grain, fact.average_cost_per_click, fact.average_click_rate,
-      fact.total_clicks, fact.average_cost_per_conversion, fact.average_conversion_rate,
-      fact.total_conversions]
-    sorts: [fact.date_period_dynamic_grain]
-    limit: 500
-    column_limit: 50
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: false
-    show_x_axis_ticks: true
-    x_axis_scale: time
-    y_axis_scale_mode: linear
-    show_null_points: false
-    point_style: none
-    interpolation: linear
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    label: Average Cost per Conversion
-    ordering: none
-    show_null_labels: false
-    leftAxisLabelVisible: false
-    leftAxisLabel: ''
-    rightAxisLabelVisible: false
-    rightAxisLabel: ''
-    barColors: [red, blue]
-    smoothedBars: false
-    orientation: automatic
-    labelPosition: left
-    percentType: total
-    percentPosition: inline
-    valuePosition: right
-    labelColorEnabled: false
-    labelColor: "#FFF"
-    series_types:
-      fact.total_clicks: area
-    show_dropoff: true
-    y_axes: [{label: '', maxValue: !!null '', minValue: !!null '', orientation: left,
-        showLabels: true, showValues: true, tickDensity: default, tickDensityCustom: !!null '',
-        type: linear, unpinAxis: false, valueFormat: "$0", series: [{id: fact.average_cost_per_click,
-            name: Cost per Click, __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-            __LINE_NUM: 528, axisId: fact.average_cost_per_click}], __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-        __LINE_NUM: 516}, {label: !!null '', maxValue: !!null '', minValue: !!null '',
-        orientation: right, showLabels: true, showValues: true, tickDensity: default,
-        tickDensityCustom: !!null '', type: linear, unpinAxis: false, valueFormat: 0.0%,
-        series: [{id: fact.average_click_rate, name: Click Through Rate, axisId: fact.average_click_rate,
-            __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-            __LINE_NUM: 547}], __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-        __LINE_NUM: 535}, {label: '', maxValue: !!null '', minValue: !!null '', orientation: right,
-        showLabels: true, showValues: true, tickDensity: default, tickDensityCustom: !!null '',
-        type: linear, unpinAxis: false, valueFormat: !!null '', series: [{id: fact.total_clicks,
-            name: Clicks, axisId: fact.total_clicks, __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-            __LINE_NUM: 566}], __FILE: app-marketing-config-3d4d8a33c661890929b121b4e924d117-a68b43c6a8cf419cb1a5c8f0438a929da123891e/google_ads_overview.dashboard.lookml,
-        __LINE_NUM: 554}]
-    discontinuous_nulls: false
-    focus_on_hover: false
-    reference_lines: []
-    colors: ["#d06180", "#dc9d4f", "#7869df", "#6e98f9", "#8ac8ca", "#4bb86a", "#a4a6a9",
-      "#a6b7ff", "#afe8fd", "#ea9895", "#f1e582"]
-    series_colors: {}
-    hidden_series: [fact.average_click_rate, fact.total_clicks]
-    series_labels:
-      fact.total_cost: Spend
-      fact.total_clicks: Clicks
-    hidden_fields: [fact.average_cost_per_conversion, fact.average_conversion_rate,
-      fact.total_conversions]
-    y_axis_reversed: false
-    listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
-      Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 13
-    col: 14
-    width: 10
-    height: 6
-  - title: Campaigns
-    name: Campaigns
-    model: block_google_ads_transfer
-    explore: period_fact
-    type: table
-    fields: [campaign.name, fact.weighted_average_position, fact.total_cost, fact.total_conversions,
-      fact.average_cost_per_conversion, fact.average_conversion_rate, fact.average_cost_per_click,
-      fact.average_click_rate]
-    sorts: [fact.total_cost desc]
-    limit: 10
-    column_limit: 50
-    query_timezone: America/Los_Angeles
-    label: Campaign Details
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    hide_totals: false
-    hide_row_totals: false
-    table_theme: white
-    limit_displayed_rows: false
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    enable_conditional_formatting: false
-    conditional_formatting_ignored_fields: []
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    hidden_fields:
-    series_labels:
-      fact.total_cost: Spend
-    listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
-      Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 19
-    col: 0
-    width: 24
-    height: 6
   - title: Spend
     name: Spend
-    model: block_google_ads_transfer
-    explore: period_fact
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
     type: single_value
-    fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
-      last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
-      last_fact.average_conversion_rate, fact.average_click_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, fact.date_period]
-    sorts: [fact.date_period]
-    limit: 1
-    dynamic_fields: [{table_calculation: total_cost_change, label: Total Cost Change,
-        expression: "${fact.total_cost} - ${last_fact.total_cost}", value_format: !!null '',
-        value_format_name: usd_0, _kind_hint: measure, _type_hint: number}, {table_calculation: total_conversion_change,
-        label: Total Conversion Change, expression: "${fact.total_conversions} - ${last_fact.total_conversions}",
-        value_format: !!null '', value_format_name: decimal_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_conversion_percent_change,
-        label: Cost Per Conversion Percent Change, expression: "(${fact.average_cost_per_conversion}\
-          \ - ${last_fact.average_cost_per_conversion}) / ${last_fact.average_cost_per_conversion}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_click_percent_change, label: Cost
-          Per Click Percent Change, expression: "(${fact.average_cost_per_click} -\
-          \ ${last_fact.average_cost_per_click}) / ${last_fact.average_cost_per_click}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: conversion_rate_percent_change, label: Conversion
-          Rate Percent Change, expression: "(${fact.average_conversion_rate} - ${last_fact.average_conversion_rate})\
-          \ / ${last_fact.average_conversion_rate}", value_format: !!null '', value_format_name: percent_0,
-        _kind_hint: measure, _type_hint: number}, {table_calculation: click_through_rate_percent_change,
-        label: Click Through Rate Percent Change, expression: "(${fact.average_click_rate}\
-          \ - ${last_fact.average_click_rate}) / ${last_fact.average_click_rate}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}]
+    fields: [fact.total_cost, last_fact.total_cost]
+    filters:
+      fact.date_period_latest: 'Yes'
+    limit: 500
+    dynamic_fields: [{table_calculation: diff, label: Diff, expression: "(${fact.total_cost}\
+          \ - ${last_fact.total_cost}) / ${last_fact.total_cost}", value_format: !!null '',
+        value_format_name: percent_2, _kind_hint: measure, _type_hint: number}]
     query_timezone: America/Los_Angeles
-    custom_color_enabled: false
-    custom_color: forestgreen
+    custom_color_enabled: true
     show_single_value_title: true
     show_comparison: true
     comparison_type: change
     comparison_reverse_colors: true
     show_comparison_label: false
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
     y_axis_tick_density_custom: 5
     show_x_axis_label: true
     show_x_axis_ticks: true
-    x_axis_scale: auto
     y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
     ordering: none
     show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
+    defaults_version: 1
     series_types: {}
-    hidden_fields: [last_fact.total_cost, fact.total_conversions, last_fact.total_conversions,
-      last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
-      last_fact.average_conversion_rate, fact.average_click_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, click_through_rate_percent_change,
-      conversion_rate_percent_change, cost_per_click_percent_change, cost_per_conversion_percent_change,
-      total_conversion_change, fact.date_period]
-    single_value_title: Spend
+    hidden_fields: [last_fact.total_cost]
     listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
       Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 0
-    col: 0
-    width: 9
-    height: 3
+    row: 17
+    col: 8
+    width: 8
+    height: 4
   - title: Conversions
     name: Conversions
-    model: block_google_ads_transfer
-    explore: period_fact
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
     type: single_value
-    fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
-      last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
-      last_fact.average_conversion_rate, fact.average_click_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, fact.date_period]
-    sorts: [fact.date_period]
-    limit: 1
-    dynamic_fields: [{table_calculation: total_cost_change, label: Total Cost Change,
-        expression: "${fact.total_cost} - ${last_fact.total_cost}", value_format: !!null '',
-        value_format_name: usd_0, _kind_hint: measure, _type_hint: number}, {table_calculation: total_conversion_change,
-        label: Total Conversion Change, expression: "${fact.total_conversions} - ${last_fact.total_conversions}",
-        value_format: !!null '', value_format_name: decimal_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_conversion_percent_change,
-        label: Cost Per Conversion Percent Change, expression: "(${fact.average_cost_per_conversion}\
-          \ - ${last_fact.average_cost_per_conversion}) / ${last_fact.average_cost_per_conversion}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_click_percent_change, label: Cost
-          Per Click Percent Change, expression: "(${fact.average_cost_per_click} -\
-          \ ${last_fact.average_cost_per_click}) / ${last_fact.average_cost_per_click}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: conversion_rate_percent_change, label: Conversion
-          Rate Percent Change, expression: "(${fact.average_conversion_rate} - ${last_fact.average_conversion_rate})\
-          \ / ${last_fact.average_conversion_rate}", value_format: !!null '', value_format_name: percent_0,
-        _kind_hint: measure, _type_hint: number}, {table_calculation: click_through_rate_percent_change,
-        label: Click Through Rate Percent Change, expression: "(${fact.average_click_rate}\
-          \ - ${last_fact.average_click_rate}) / ${last_fact.average_click_rate}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}]
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: false
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: true
-    comparison_type: change
-    comparison_reverse_colors: false
-    show_comparison_label: false
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    hidden_fields: [fact.total_cost, last_fact.total_cost, last_fact.total_conversions,
-      last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
-      last_fact.average_conversion_rate, fact.average_click_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, click_through_rate_percent_change,
-      conversion_rate_percent_change, cost_per_click_percent_change, cost_per_conversion_percent_change,
-      total_cost_change]
-    single_value_title: ''
-    listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
-      Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 0
-    col: 9
-    width: 5
-    height: 3
-  - title: Cost Per Conversion
-    name: Cost Per Conversion
-    model: block_google_ads_transfer
-    explore: period_fact
-    type: single_value
-    fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
-      last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
-      last_fact.average_conversion_rate, fact.average_click_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, fact.date_period]
-    sorts: [fact.date_period]
-    limit: 1
-    dynamic_fields: [{table_calculation: total_cost_change, label: Total Cost Change,
-        expression: "${fact.total_cost} - ${last_fact.total_cost}", value_format: !!null '',
-        value_format_name: usd_0, _kind_hint: measure, _type_hint: number}, {table_calculation: total_conversion_change,
-        label: Total Conversion Change, expression: "${fact.total_conversions} - ${last_fact.total_conversions}",
-        value_format: !!null '', value_format_name: decimal_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_conversion_percent_change,
-        label: Cost Per Conversion Percent Change, expression: "(${fact.average_cost_per_conversion}\
-          \ - ${last_fact.average_cost_per_conversion}) / ${last_fact.average_cost_per_conversion}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_click_percent_change, label: Cost
-          Per Click Percent Change, expression: "(${fact.average_cost_per_click} -\
-          \ ${last_fact.average_cost_per_click}) / ${last_fact.average_cost_per_click}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: conversion_rate_percent_change, label: Conversion
-          Rate Percent Change, expression: "(${fact.average_conversion_rate} - ${last_fact.average_conversion_rate})\
-          \ / ${last_fact.average_conversion_rate}", value_format: !!null '', value_format_name: percent_0,
-        _kind_hint: measure, _type_hint: number}, {table_calculation: click_through_rate_percent_change,
-        label: Click Through Rate Percent Change, expression: "(${fact.average_click_rate}\
-          \ - ${last_fact.average_click_rate}) / ${last_fact.average_click_rate}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}]
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: false
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: true
-    comparison_type: change
-    comparison_reverse_colors: true
-    show_comparison_label: false
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    hidden_fields: [fact.total_cost, last_fact.total_cost, fact.total_conversions,
-      last_fact.total_conversions, last_fact.average_cost_per_conversion, fact.average_conversion_rate,
-      last_fact.average_conversion_rate, fact.average_click_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, click_through_rate_percent_change,
-      conversion_rate_percent_change, cost_per_click_percent_change, total_conversion_change,
-      total_cost_change]
-    single_value_title: Per Conversion
-    listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
-      Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 0
-    col: 14
-    width: 5
-    height: 3
-  - title: Conversion Rate
-    name: Conversion Rate
-    model: block_google_ads_transfer
-    explore: period_fact
-    type: single_value
-    fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
-      last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
-      last_fact.average_conversion_rate, fact.average_click_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, fact.date_period]
-    sorts: [fact.date_period]
-    limit: 1
-    dynamic_fields: [{table_calculation: total_cost_change, label: Total Cost Change,
-        expression: "${fact.total_cost} - ${last_fact.total_cost}", value_format: !!null '',
-        value_format_name: usd_0, _kind_hint: measure, _type_hint: number}, {table_calculation: total_conversion_change,
-        label: Total Conversion Change, expression: "${fact.total_conversions} - ${last_fact.total_conversions}",
-        value_format: !!null '', value_format_name: decimal_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_conversion_percent_change,
-        label: Cost Per Conversion Percent Change, expression: "(${fact.average_cost_per_conversion}\
-          \ - ${last_fact.average_cost_per_conversion}) / ${last_fact.average_cost_per_conversion}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_click_percent_change, label: Cost
-          Per Click Percent Change, expression: "(${fact.average_cost_per_click} -\
-          \ ${last_fact.average_cost_per_click}) / ${last_fact.average_cost_per_click}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: conversion_rate_percent_change, label: Conversion
-          Rate Percent Change, expression: "(${fact.average_conversion_rate} - ${last_fact.average_conversion_rate})\
-          \ / ${last_fact.average_conversion_rate}", value_format: !!null '', value_format_name: percent_0,
-        _kind_hint: measure, _type_hint: number}, {table_calculation: click_through_rate_percent_change,
-        label: Click Through Rate Percent Change, expression: "(${fact.average_click_rate}\
-          \ - ${last_fact.average_click_rate}) / ${last_fact.average_click_rate}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}]
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: false
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: true
-    comparison_type: change
-    comparison_reverse_colors: false
-    show_comparison_label: false
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    hidden_fields: [fact.total_cost, last_fact.total_cost, fact.total_conversions,
-      last_fact.total_conversions, last_fact.average_cost_per_conversion, fact.average_cost_per_conversion,
-      last_fact.average_conversion_rate, fact.average_click_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, click_through_rate_percent_change,
-      cost_per_click_percent_change, cost_per_conversion_percent_change, total_conversion_change,
-      total_cost_change]
-    single_value_title: ''
-    listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
-      Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 0
-    col: 19
-    width: 5
-    height: 3
-  - title: Click Rate
-    name: Click Rate
-    model: block_google_ads_transfer
-    explore: period_fact
-    type: single_value
-    fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
-      last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
-      last_fact.average_conversion_rate, fact.average_click_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, fact.date_period]
-    sorts: [fact.date_period]
-    limit: 1
-    dynamic_fields: [{table_calculation: total_cost_change, label: Total Cost Change,
-        expression: "${fact.total_cost} - ${last_fact.total_cost}", value_format: !!null '',
-        value_format_name: usd_0, _kind_hint: measure, _type_hint: number}, {table_calculation: total_conversion_change,
-        label: Total Conversion Change, expression: "${fact.total_conversions} - ${last_fact.total_conversions}",
-        value_format: !!null '', value_format_name: decimal_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_conversion_percent_change,
-        label: Cost Per Conversion Percent Change, expression: "(${fact.average_cost_per_conversion}\
-          \ - ${last_fact.average_cost_per_conversion}) / ${last_fact.average_cost_per_conversion}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_click_percent_change, label: Cost
-          Per Click Percent Change, expression: "(${fact.average_cost_per_click} -\
-          \ ${last_fact.average_cost_per_click}) / ${last_fact.average_cost_per_click}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: conversion_rate_percent_change, label: Conversion
-          Rate Percent Change, expression: "(${fact.average_conversion_rate} - ${last_fact.average_conversion_rate})\
-          \ / ${last_fact.average_conversion_rate}", value_format: !!null '', value_format_name: percent_0,
-        _kind_hint: measure, _type_hint: number}, {table_calculation: click_through_rate_percent_change,
-        label: Click Through Rate Percent Change, expression: "(${fact.average_click_rate}\
-          \ - ${last_fact.average_click_rate}) / ${last_fact.average_click_rate}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}]
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: false
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: true
-    comparison_type: change
-    comparison_reverse_colors: false
-    show_comparison_label: false
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    hidden_fields: [fact.total_cost, last_fact.total_cost, fact.total_conversions,
-      last_fact.total_conversions, last_fact.average_cost_per_conversion, fact.average_cost_per_conversion,
-      fact.average_conversion_rate, last_fact.average_conversion_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, conversion_rate_percent_change,
-      cost_per_click_percent_change, cost_per_conversion_percent_change, total_conversion_change,
-      total_cost_change, fact.date_period]
-    single_value_title: ''
-    listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
-      Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 13
-    col: 9
-    width: 5
-    height: 3
-  - title: Per Click
-    name: Per Click
-    model: block_google_ads_transfer
-    explore: period_fact
-    type: single_value
-    fields: [fact.total_cost, fact.total_conversions, last_fact.total_cost, last_fact.total_conversions,
-      last_fact.average_cost_per_conversion, fact.average_cost_per_conversion, fact.average_conversion_rate,
-      last_fact.average_conversion_rate, fact.average_click_rate, last_fact.average_click_rate,
-      fact.average_cost_per_click, last_fact.average_cost_per_click, fact.date_period]
-    sorts: [fact.date_period]
-    limit: 1
-    dynamic_fields: [{table_calculation: total_cost_change, label: Total Cost Change,
-        expression: "${fact.total_cost} - ${last_fact.total_cost}", value_format: !!null '',
-        value_format_name: usd_0, _kind_hint: measure, _type_hint: number}, {table_calculation: total_conversion_change,
-        label: Total Conversion Change, expression: "${fact.total_conversions} - ${last_fact.total_conversions}",
-        value_format: !!null '', value_format_name: decimal_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_conversion_percent_change,
-        label: Cost Per Conversion Percent Change, expression: "(${fact.average_cost_per_conversion}\
-          \ - ${last_fact.average_cost_per_conversion}) / ${last_fact.average_cost_per_conversion}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: cost_per_click_percent_change, label: Cost
-          Per Click Percent Change, expression: "(${fact.average_cost_per_click} -\
-          \ ${last_fact.average_cost_per_click}) / ${last_fact.average_cost_per_click}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}, {table_calculation: conversion_rate_percent_change, label: Conversion
-          Rate Percent Change, expression: "(${fact.average_conversion_rate} - ${last_fact.average_conversion_rate})\
-          \ / ${last_fact.average_conversion_rate}", value_format: !!null '', value_format_name: percent_0,
-        _kind_hint: measure, _type_hint: number}, {table_calculation: click_through_rate_percent_change,
-        label: Click Through Rate Percent Change, expression: "(${fact.average_click_rate}\
-          \ - ${last_fact.average_click_rate}) / ${last_fact.average_click_rate}",
-        value_format: !!null '', value_format_name: percent_0, _kind_hint: measure,
-        _type_hint: number}]
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: false
-    custom_color: forestgreen
-    show_single_value_title: true
-    show_comparison: true
-    comparison_type: change
-    comparison_reverse_colors: true
-    show_comparison_label: false
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    series_types: {}
-    hidden_fields: [fact.total_cost, last_fact.total_cost, fact.total_conversions,
-      last_fact.total_conversions, last_fact.average_cost_per_conversion, fact.average_cost_per_conversion,
-      fact.average_conversion_rate, last_fact.average_conversion_rate, fact.average_click_rate,
-      last_fact.average_click_rate, last_fact.average_cost_per_click, click_through_rate_percent_change,
-      conversion_rate_percent_change, cost_per_conversion_percent_change, total_conversion_change,
-      total_cost_change]
-    single_value_title: ''
-    listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
-      Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 16
-    col: 9
-    width: 5
-    height: 3
-  - title: Spend To Date
-    name: Spend To Date
-    model: block_google_ads_transfer
-    explore: period_fact
-    type: looker_area
-    fields: [fact.date_day_of_period, fact.total_cost, fact.cumulative_spend, last_fact.total_cost,
-      last_fact.cumulative_spend]
-    sorts: [fact.date_day_of_period]
+    fields: [fact.total_conversions, last_fact.total_conversions]
+    filters:
+      fact.date_period_latest: 'Yes'
+    sorts: [fact.total_conversions desc]
     limit: 500
-    column_limit: 50
+    dynamic_fields: [{table_calculation: diff, label: Diff, expression: "(${fact.total_conversions}\
+          \ - ${last_fact.total_conversions}) /   ${last_fact.total_conversions}",
+        value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
+        _type_hint: number}]
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: true
+    show_comparison_label: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#4285F4",
+        font_color: !!null '', color_application: {collection_id: gooooooooogle, palette_id: gooooooooogle-sequential-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
-    y_axes: [{label: '', orientation: left, series: [{axisId: fact.cumulative_spend,
-            id: fact.cumulative_spend, name: This Period}], showLabels: false, showValues: false,
-        unpinAxis: false, tickDensity: default, type: linear}, {label: '', orientation: left,
-        series: [{axisId: last_fact.cumulative_spend, id: last_fact.cumulative_spend,
-            name: Prior Period}], showLabels: false, showValues: true, unpinAxis: false,
-        tickDensity: default, type: linear}]
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [last_fact.total_conversions]
+    listen:
+      Period: fact.period
+    row: 17
+    col: 16
+    width: 8
+    height: 4
+  - name: <font color="#34A853" size="45" weight="bold"><i class="fa fa-home" aria-hidden="true"></i><strong>
+      Topline Metrics </strong> <font color= "#4285F4"size="45"> Clicks, CTR and Impressions</font>
+    type: text
+    title_text: <font color="#34A853" size="4.5" weight="bold"><i class="fa fa-home"
+      aria-hidden="true"></i><strong> Topline Metrics </strong> <font color= "#4285F4"size="4.5">
+      Clicks, CTR and Impressions</font>
+    subtitle_text: ''
+    body_text: "<center> <b>Recommended Action</b> Drill into Impressions to understand\
+      \ what channels drive the most impressions and traffic.<center>"
+    row: 0
+    col: 0
+    width: 24
+    height: 3
+  - name: Spend (2)
+    type: text
+    title_text: Spend
+    body_text: b
+    row: 13
+    col: 0
+    width: 24
+    height: 4
+  - title: Impressions
+    name: Impressions
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    type: single_value
+    fields: [fact.total_impressions, last_fact.total_impressions]
+    filters:
+      fact.date_period_latest: 'Yes'
+    limit: 500
+    dynamic_fields: [{table_calculation: diff, label: Diff, expression: "(${fact.total_impressions}\
+          \ - ${last_fact.total_impressions}) /  ${last_fact.total_impressions}",
+        value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
+        _type_hint: number}]
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#4285F4",
+        font_color: !!null '', color_application: {collection_id: gooooooooogle, palette_id: gooooooooogle-sequential-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [last_fact.total_impressions]
+    listen:
+      Period: fact.period
+    row: 3
+    col: 0
+    width: 6
+    height: 4
+  - title: Clicks
+    name: Clicks
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    type: single_value
+    fields: [fact.total_clicks, last_fact.total_clicks]
+    filters:
+      fact.date_period_latest: 'Yes'
+    limit: 500
+    dynamic_fields: [{table_calculation: diff, label: Diff, expression: "(${fact.total_clicks}\
+          \ - ${last_fact.total_clicks}) /  ${last_fact.total_clicks}", value_format: !!null '',
+        value_format_name: percent_2, _kind_hint: measure, _type_hint: number}]
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#4285F4",
+        font_color: !!null '', color_application: {collection_id: gooooooooogle, palette_id: gooooooooogle-sequential-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [last_fact.total_clicks]
+    listen:
+      Period: fact.period
+    row: 3
+    col: 6
+    width: 6
+    height: 4
+  - title: Click Through Rate (CTR)
+    name: Click Through Rate (CTR)
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    type: single_value
+    fields: [fact.average_click_rate, last_fact.average_click_rate]
+    filters:
+      fact.date_period_latest: 'Yes'
+    limit: 500
+    dynamic_fields: [{table_calculation: diff, label: Diff, expression: "(${fact.average_click_rate}\
+          \ - ${last_fact.average_click_rate}) /  ${last_fact.average_click_rate}",
+        value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
+        _type_hint: number}]
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#4285F4",
+        font_color: !!null '', color_application: {collection_id: gooooooooogle, palette_id: gooooooooogle-sequential-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [last_fact.average_click_rate]
+    listen:
+      Period: fact.period
+    row: 3
+    col: 12
+    width: 6
+    height: 4
+  - title: Cost per Click (CPC)
+    name: Cost per Click (CPC)
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    type: single_value
+    fields: [fact.average_cost_per_click, last_fact.average_cost_per_click]
+    filters:
+      fact.date_period_latest: 'Yes'
+    limit: 500
+    dynamic_fields: [{table_calculation: diff, label: Diff, expression: "(${fact.average_cost_per_click}\
+          \ - ${last_fact.average_cost_per_click}) /  ${last_fact.average_cost_per_click}",
+        value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
+        _type_hint: number}]
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#4285F4",
+        font_color: !!null '', color_application: {collection_id: gooooooooogle, palette_id: gooooooooogle-sequential-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [last_fact.average_cost_per_click]
+    listen:
+      Period: fact.period
+    row: 3
+    col: 18
+    width: 6
+    height: 4
+  - title: Impressions (copy)
+    name: Impressions (copy)
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    type: looker_line
+    fields: [fact.total_impressions, fact.date_date, fact.total_clicks]
+    fill_fields: [fact.date_date]
+    filters:
+      fact.date_period_latest: 'Yes'
+    sorts: [fact.date_date desc]
+    limit: 500
+    dynamic_fields: [{table_calculation: diff, label: Diff, expression: "(${fact.total_impressions}\
+          \ - ${last_fact.total_impressions}) /  ${last_fact.total_impressions}",
+        value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
+        _type_hint: number, is_disabled: true}]
+    query_timezone: America/Los_Angeles
+    x_axis_gridlines: false
+    y_axis_gridlines: false
+    show_view_names: false
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
@@ -759,80 +425,71 @@
     stacking: ''
     limit_displayed_rows: false
     legend_position: center
-    colors: ["#4bb86a", "#8fe4a7", "#6e98f9", "#8ac8ca", "#d06180", "#dc9d4f", "#7869df",
-      "#a4a6a9", "#a6b7ff", "#afe8fd", "#ea9895", "#f1e582"]
-    series_types: {}
     point_style: none
-    series_colors: {}
-    series_labels:
-      fact.total_cost: Spend
     show_value_labels: false
-    label_density: 1
+    label_density: 25
     x_axis_scale: auto
     y_axis_combined: true
-    reference_lines: []
-    show_null_points: false
+    show_null_points: true
     interpolation: linear
-    discontinuous_nulls: false
+    y_axes: [{label: '', orientation: left, series: [{axisId: fact.total_impressions,
+            id: fact.total_impressions, name: Impressions}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear},
+      {label: !!null '', orientation: right, series: [{axisId: fact.total_clicks,
+            id: fact.total_clicks, name: Clicks}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
+    series_types: {}
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#4285F4",
+        font_color: !!null '', color_application: {collection_id: gooooooooogle, palette_id: gooooooooogle-sequential-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
+    ordering: none
+    show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
-    ordering: none
-    show_null_labels: false
-    label: Average Cost per Conversion
-    leftAxisLabelVisible: false
-    leftAxisLabel: ''
-    rightAxisLabelVisible: false
-    rightAxisLabel: ''
-    barColors: [red, blue]
-    smoothedBars: false
-    orientation: automatic
-    labelPosition: left
-    percentType: total
-    percentPosition: inline
-    valuePosition: right
-    labelColorEnabled: false
-    labelColor: "#FFF"
-    show_dropoff: false
-    focus_on_hover: false
-    hidden_fields: [fact.total_cost, last_fact.total_cost]
-    column_group_spacing_ratio: 0
-    column_spacing_ratio: 0
+    defaults_version: 1
+    hidden_fields: []
+    title_hidden: true
     listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
       Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 3
+    row: 7
     col: 0
-    width: 9
-    height: 10
-  - title: Funnel
-    name: Funnel
-    model: block_google_ads_transfer
-    explore: period_fact
-    type: looker_column
-    fields: [fact.total_impressions, fact.total_clicks, fact.total_conversions, fact.date_period]
-    sorts: [fact.date_period desc]
-    limit: 1
-    column_limit: 50
+    width: 12
+    height: 6
+  - title: Impressions (copy 2)
+    name: Impressions (copy 2)
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    type: looker_line
+    fields: [fact.date_date, fact.average_click_rate, fact.average_cost_per_click]
+    fill_fields: [fact.date_date]
+    filters:
+      fact.date_period_latest: 'Yes'
+    sorts: [fact.date_date desc]
+    limit: 500
+    dynamic_fields: [{table_calculation: diff, label: Diff, expression: "(${fact.total_impressions}\
+          \ - ${last_fact.total_impressions}) /  ${last_fact.total_impressions}",
+        value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
+        _type_hint: number, is_disabled: true}]
     query_timezone: America/Los_Angeles
     x_axis_gridlines: false
-    y_axis_gridlines: true
+    y_axis_gridlines: false
     show_view_names: false
-    y_axes: [{label: '', orientation: left, series: [{axisId: fact.total_impressions,
-            id: fact.total_impressions, name: Impressions}, {axisId: fact.total_clicks,
-            id: fact.total_clicks, name: Clicks}, {axisId: fact.total_conversions,
-            id: fact.total_conversions, name: Conversions}], showLabels: true, showValues: true,
-        maxValue: !!null '', minValue: !!null '', valueFormat: !!null '', unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: log}]
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
     y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: false
+    show_x_axis_label: false
+    show_x_axis_ticks: true
     y_axis_scale_mode: linear
     x_axis_reversed: false
     y_axis_reversed: false
@@ -841,38 +498,58 @@
     stacking: ''
     limit_displayed_rows: false
     legend_position: center
-    colors: ["#d06180", "#a4a6a9", "#7869df", "#6e98f9", "#dc9d4f", "#4bb86a", "#8ac8ca",
-      "#a6b7ff", "#afe8fd", "#ea9895", "#f1e582"]
-    series_types: {}
     point_style: none
-    series_colors: {}
     show_value_labels: false
     label_density: 25
     x_axis_scale: auto
     y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_dropoff: true
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    hidden_fields: [fact.date_period]
-    custom_color_enabled: false
-    custom_color: forestgreen
+    show_null_points: true
+    interpolation: linear
+    y_axes: [{label: '', orientation: left, series: [{axisId: fact.average_click_rate,
+            id: fact.average_click_rate, name: Click Through Rate}], showLabels: true,
+        showValues: true, unpinAxis: false, tickDensity: default, type: linear}, {
+        label: '', orientation: right, series: [{axisId: fact.average_cost_per_click,
+            id: fact.average_cost_per_click, name: Cost per Click}], showLabels: true,
+        showValues: true, unpinAxis: false, tickDensity: default, type: linear}]
+    series_types: {}
+    swap_axes: false
+    custom_color_enabled: true
     show_single_value_title: true
     show_comparison: true
     comparison_type: change
     comparison_reverse_colors: false
     show_comparison_label: false
-    single_value_title: Conversion Rate
-    comparison_label: ''
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#4285F4",
+        font_color: !!null '', color_application: {collection_id: gooooooooogle, palette_id: gooooooooogle-sequential-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_fields: []
+    title_hidden: true
     listen:
-      Account: customer.account_descriptive_name
-      Campaign: campaign.name
-      Ad Group: ad_group.ad_group_name
       Period: fact.period
-      Period Latest: fact.date_period_latest
-    row: 13
-    col: 0
-    width: 9
+    row: 7
+    col: 12
+    width: 12
     height: 6
+  filters:
+  - name: Period
+    title: Period
+    type: field_filter
+    default_value: 28 day
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: button_toggles
+      display: popover
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    listens_to_filters: []
+    field: fact.period
