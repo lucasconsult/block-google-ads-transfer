@@ -1,7 +1,7 @@
 include: /shared_views/*
 
-view: ad_basic_stats {
-  sql_table_name: (select *,GENERATE_UUID() as primary_key from `@{GOOGLE_ADS_SCHEMA}.AdBasicStats_@{GOOGLE_ADS_CUSTOMER_ID}`)    ;;
+view: ad_stats {
+  sql_table_name: (select *,GENERATE_UUID() as primary_key from `@{GOOGLE_ADS_SCHEMA}.AdStats_@{GOOGLE_ADS_CUSTOMER_ID}` )   ;;
   extends: [ads_common,date_base,period_base]
 
   dimension: primary_key {
@@ -207,4 +207,103 @@ view: ad_basic_stats {
     type: number
     sql: ${TABLE}.ViewThroughConversions ;;
   }
+
+
+
+  dimension: active_view_cpm {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.ActiveViewCpm ;;
+  }
+
+  dimension: active_view_ctr {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.ActiveViewCtr ;;
+  }
+
+  dimension: average_cost {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.AverageCost ;;
+  }
+
+  dimension: average_cpc {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.AverageCpc ;;
+  }
+
+  dimension: average_cpm {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.AverageCpm ;;
+  }
+
+  dimension: click_type {
+    type: string
+    sql: ${TABLE}.ClickType ;;
+  }
+
+  dimension: conversion_rate {
+    type: number
+    sql: ${TABLE}.ConversionRate ;;
+  }
+
+  dimension: cost_per_conversion {
+    type: number
+    sql: ${TABLE}.CostPerConversion ;;
+  }
+
+  dimension: cost_per_current_model_attributed_conversion {
+    type: number
+    sql: ${TABLE}.CostPerCurrentModelAttributedConversion ;;
+  }
+
+  dimension: ctr {
+    type: number
+    sql: ${TABLE}.Ctr ;;
+  }
+
+  dimension: current_model_attributed_conversion_value {
+    type: number
+    sql: ${TABLE}.CurrentModelAttributedConversionValue ;;
+  }
+
+  dimension: current_model_attributed_conversions {
+    type: number
+    sql: ${TABLE}.CurrentModelAttributedConversions ;;
+  }
+
+  dimension: gmail_forwards {
+    type: number
+    sql: ${TABLE}.GmailForwards ;;
+  }
+
+  dimension: gmail_saves {
+    type: number
+    sql: ${TABLE}.GmailSaves ;;
+  }
+
+  dimension: gmail_secondary_clicks {
+    type: number
+    sql: ${TABLE}.GmailSecondaryClicks ;;
+  }
+
+  dimension: interaction_rate {
+    type: number
+    sql: ${TABLE}.InteractionRate ;;
+  }
+
+  dimension: value_per_conversion {
+    type: number
+    sql: ${TABLE}.ValuePerConversion ;;
+  }
+
+  dimension: value_per_current_model_attributed_conversion {
+    type: number
+    sql: ${TABLE}.ValuePerCurrentModelAttributedConversion ;;
+  }
+
+
 }

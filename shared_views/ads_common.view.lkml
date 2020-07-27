@@ -17,7 +17,7 @@ view: ads_common {
     description: "Cost per conversion."
     type: number
     sql: ${cost}*1.0 / NULLIF(${conversions},0) ;;
-    value_format_name: usd
+    value_format_name: usd_large
   }
 
   dimension: value_per_conversion {
@@ -26,7 +26,7 @@ view: ads_common {
     description: "Conv. Value per conversion."
     type: number
     sql: ${conversion_value}*1.0 / NULLIF(${conversions},0) ;;
-    value_format_name: usd
+    value_format_name: usd_large
   }
 
   dimension: cost_per_click {
@@ -35,7 +35,7 @@ view: ads_common {
     description: "Average cost per ad click."
     type: number
     sql: ${cost}*1.0 / NULLIF(${clicks},0) ;;
-    value_format_name: usd
+    value_format_name: usd_large
   }
 
   dimension: value_per_click {
@@ -44,7 +44,7 @@ view: ads_common {
     description: "Conv. Value per Click."
     type: number
     sql: ${conversion_value}*1.0 / NULLIF(${clicks},0) ;;
-    value_format_name: usd
+    value_format_name: usd_large
   }
 
   dimension: cost_per_impression {
@@ -53,7 +53,7 @@ view: ads_common {
     description: "Average cost per 1000 ad impressions."
     type: number
     sql: ${cost}*1.0 / NULLIF(${impressions},0) * 1000.0 ;;
-    value_format_name: usd
+    value_format_name: usd_large
   }
 
   dimension: value_per_impression {
@@ -62,7 +62,7 @@ view: ads_common {
     description: "Conv. Value per Impression."
     type: number
     sql: ${conversion_value}*1.0 / NULLIF(${impressions},0) ;;
-    value_format_name: usd
+    value_format_name: usd_large
   }
 
   dimension: value_per_cost {
@@ -90,7 +90,7 @@ view: ads_common {
     type: number
     sql: ${total_clicks}*1.0/nullif(${total_impressions},0) ;;
     value_format_name: percent_2
-    drill_fields: [fact.date_date, campaign.name, average_click_rate]
+    drill_fields: [campaign.campaign_name, average_click_rate]
   }
 
   measure: average_cost_per_conversion {
@@ -98,8 +98,8 @@ view: ads_common {
     description: "Cost per conversion."
     type: number
     sql: ${total_cost}*1.0 / NULLIF(${total_conversions},0) ;;
-    value_format_name: usd
-    drill_fields: [fact.date_date, campaign.name, fact.total_conversions, fact.total_cost, fact.average_cost_per_conversion]
+    value_format_name: usd_large
+    drill_fields: [fact.date_date, campaign.campaign_name, fact.total_conversions, fact.total_cost, fact.average_cost_per_conversion]
   }
 
   measure: average_cost_per_value {
@@ -107,8 +107,8 @@ view: ads_common {
     description: "Cost per value."
     type: number
     sql: ${total_cost}*1.0 / NULLIF(${total_conversionvalue},0) ;;
-    value_format_name: usd
-    drill_fields: [fact.date_date, campaign.name, fact.total_conversionvalue, fact.total_cost, fact.average_cost_per_conversion]
+    value_format_name: usd_large
+    drill_fields: [fact.date_date, campaign.campaign_name, fact.total_conversionvalue, fact.total_cost, fact.average_cost_per_conversion]
   }
 
   measure: average_value_per_conversion {
@@ -116,7 +116,7 @@ view: ads_common {
     description: "Average value per conversion."
     type: number
     sql: ${total_conversionvalue}*1.0 / NULLIF(${total_conversions},0) ;;
-    value_format_name: usd
+    value_format_name: usd_large
   }
 
   measure: average_cost_per_click {
@@ -124,8 +124,8 @@ view: ads_common {
     description: "Average cost per ad click."
     type: number
     sql: ${total_cost}*1.0 / NULLIF(${total_clicks},0) ;;
-    value_format_name: usd
-    drill_fields: [fact.date_date, campaign.name, average_cost_per_click]
+    value_format_name: usd_large
+    drill_fields: [fact.date_date, campaign.campaign_name, average_cost_per_click]
   }
 
   measure: average_value_per_click {
@@ -133,7 +133,7 @@ view: ads_common {
     description: "Average value per ad click."
     type: number
     sql: ${total_conversionvalue}*1.0 / NULLIF(${total_clicks},0) ;;
-    value_format_name: usd
+    value_format_name: usd_large
   }
 
   measure: average_cost_per_impression {
@@ -141,7 +141,7 @@ view: ads_common {
     description: "Average cost per ad impression viewed."
     type: number
     sql: ${total_cost}*1.0 / NULLIF(${total_impressions},0) * 1000.0 ;;
-    value_format_name: usd
+    value_format_name: usd_large
   }
 
   measure: average_value_per_impression {
@@ -149,7 +149,7 @@ view: ads_common {
     description: "Average value per ad impression viewed."
     type: number
     sql: ${total_conversionvalue}*1.0 / NULLIF(${total_impressions},0) ;;
-    value_format_name: usd
+    value_format_name: usd_large
   }
 
   measure: average_value_per_cost {
@@ -166,22 +166,22 @@ view: ads_common {
     type: number
     sql: ${total_conversions}*1.0 / NULLIF(${total_clicks},0) ;;
     value_format_name: percent_2
-    drill_fields: [fact.date_date, campaign.name, average_conversion_rate]
+    drill_fields: [fact.date_date, campaign.campaign_name, average_conversion_rate]
   }
 
   measure: cumulative_spend {
     type: running_total
     sql: ${total_cost} ;;
-    drill_fields: [fact.date_date, campaign.name, fact.total_cost]
-    value_format_name: usd_0
+    drill_fields: [fact.date_date, campaign.campaign_name, fact.total_cost]
+    value_format_name: usd_large
     direction: "column"
   }
 
   measure: cumulative_conversions {
     type: running_total
     sql: ${total_conversions} ;;
-    drill_fields: [fact.date_date, campaign.name, fact.total_conversions]
-    value_format_name: decimal_0
+    drill_fields: [fact.date_date, campaign.campaign_name, fact.total_conversions]
+    value_format_name: large_number
     direction: "column"
   }
 
@@ -190,16 +190,16 @@ view: ads_common {
     description: "Total ad clicks."
     type: sum
     sql: ${clicks} ;;
-    value_format_name: decimal_0
+    value_format_name: large_number
     drill_fields: [fact.date_date, campaign.name, total_clicks]
   }
 
   measure: total_conversions {
     label: "Conversions"
-    description: "Total conversions."
+    description: "Total conversions. Note decimal numbers (i.e. 0.5) mean you're using a non-last-click attribution method."
     type: sum
-    sql: ${conversions} ;;
-    value_format_name: decimal_0
+    sql: ${conversions} * 1.0 ;;
+    value_format_name: decimal_2
     drill_fields: [fact.date_date, campaign.name, total_conversions]
   }
 
@@ -208,7 +208,7 @@ view: ads_common {
     description: "Total conversion value."
     type: sum
     sql: ${conversion_value} ;;
-    value_format_name: usd_0
+    value_format_name: usd_large
   }
 
   measure: total_cost {
@@ -216,7 +216,7 @@ view: ads_common {
     description: "Total cost."
     type: sum
     sql: ${cost} ;;
-    value_format_name: usd_0
+    value_format_name: usd_large
     drill_fields: [fact.date_date, campaign.name, total_cost]
   }
 
@@ -226,7 +226,15 @@ view: ads_common {
     type:  sum
     sql:  ${impressions} ;;
     drill_fields: [external_customer_id, total_impressions]
-    value_format_name: decimal_0
+    value_format_name: large_number
+  }
+
+  measure: total_view_through_conversions {
+    label: "View Through Conversions"
+    type: sum
+    description: "These happen when a customer sees a Display network ad, then later completes a conversion on your site without interacting with (e.g. clicking on) another ad."
+    sql: ${view_through_conversions} ;;
+    drill_fields: [fact.date_date, campaign.name, total_cost]
   }
 
   set: ad_metrics_set {
