@@ -109,6 +109,7 @@ view: keyword {
   }
 
   dimension: criteria {
+    description: "keyword name"
     type: string
     sql: ${TABLE}.Criteria ;;
   }
