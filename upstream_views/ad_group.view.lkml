@@ -56,6 +56,7 @@ view: ad_group {
   }
 
   dimension: ad_group_name {
+    drill_fields: [keyword.criteria]
     type: string
     sql: ${TABLE}.AdGroupName ;;
     link: {

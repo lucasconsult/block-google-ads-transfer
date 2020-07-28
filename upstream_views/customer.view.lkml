@@ -66,6 +66,7 @@ view: customer {
   }
 
   dimension: customer_descriptive_name {
+    drill_fields: [campaign.campaign_name]
     type: string
     sql: ${TABLE}.CustomerDescriptiveName ;;
   }

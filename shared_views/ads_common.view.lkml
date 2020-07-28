@@ -29,6 +29,7 @@ view: ads_common {
         {% else %}
          null
       {% endcase %} ;;
+      drill_fields: [customer.account_descriptive_name,campaign.campaign_name,ad_group.ad_group_name,keyword.criteria]
   }
 
 

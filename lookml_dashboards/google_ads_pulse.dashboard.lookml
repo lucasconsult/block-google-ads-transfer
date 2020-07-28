@@ -57,9 +57,10 @@
     hidden_fields: [last_fact.total_cost]
     listen:
       Period: fact.period
+      Drill By: fact.drill_by
     row: 17
-    col: 8
-    width: 8
+    col: 0
+    width: 6
     height: 4
   - title: Conversions
     name: Conversions
@@ -120,27 +121,35 @@
     hidden_fields: [last_fact.total_conversions]
     listen:
       Period: fact.period
+      Drill By: fact.drill_by
     row: 17
-    col: 16
-    width: 8
+    col: 6
+    width: 6
     height: 4
   - name: <font color="#34A853" size="45" weight="bold"><i class="fa fa-home" aria-hidden="true"></i><strong>
-      Topline Metrics </strong> <font color= "#4285F4"size="45"> Clicks, CTR and Impressions</font>
+      Measurements </strong> <font color= "#4285F4"size="45">Impressions, Clicks,
+      CTR and CPC</font>
     type: text
     title_text: <font color="#34A853" size="4.5" weight="bold"><i class="fa fa-home"
-      aria-hidden="true"></i><strong> Topline Metrics </strong> <font color= "#4285F4"size="4.5">
-      Clicks, CTR and Impressions</font>
+      aria-hidden="true"></i><strong> Measurements </strong> <font color= "#4285F4"size="4.5">Impressions,
+      Clicks, CTR and CPC</font>
     subtitle_text: ''
-    body_text: "<center> <b>Recommended Action</b> Drill into Impressions to understand\
-      \ what channels drive the most impressions and traffic.<center>"
+    body_text: |-
+      <center> <b>Recommended Action</b> Drill into CTR to gauge which ads and keywords are successful and which need to be improved. The more your keywords and ads relate to each other and to your business, the more likely a user is to click on your ads.
+      <center>
     row: 0
     col: 0
     width: 24
     height: 3
-  - name: Spend (2)
+  - name: <font color="#34A853" size="45" weight="bold"><i class="fa fa-check" aria-hidden="true"></i><strong>
+      Results </strong><font color= "#4285F4"size="45">Conversions and ROAS</font>
     type: text
-    title_text: Spend
-    body_text: b
+    title_text: <font color="#34A853" size="4.5" weight="bold"><i class="fa fa-check"
+      aria-hidden="true"></i><strong> Results </strong><font color= "#4285F4"size="4.5">Conversions
+      and ROAS</font>
+    body_text: |-
+      <center> <b>Recommended Action</b> See which keywords, ads, ad groups, and campaigns are best at driving valuable customer activity.
+      <center>
     row: 13
     col: 0
     width: 24
@@ -201,8 +210,13 @@
     defaults_version: 1
     series_types: {}
     hidden_fields: [last_fact.total_impressions]
+    note_state: collapsed
+    note_display: hover
+    note_text: Each time your ad appears on Google or the Google Network, it's counted
+      as one impression.
     listen:
       Period: fact.period
+      Drill By: fact.drill_by
     row: 3
     col: 0
     width: 6
@@ -262,8 +276,13 @@
     defaults_version: 1
     series_types: {}
     hidden_fields: [last_fact.total_clicks]
+    note_state: collapsed
+    note_display: hover
+    note_text: "When someone clicks your ad, like on the blue headline of a text ad,\
+      \ Google Ads counts that as a click.\n\n"
     listen:
       Period: fact.period
+      Drill By: fact.drill_by
     row: 3
     col: 6
     width: 6
@@ -324,8 +343,15 @@
     defaults_version: 1
     series_types: {}
     hidden_fields: [last_fact.average_click_rate]
+    note_state: collapsed
+    note_display: hover
+    note_text: You can use CTR to gauge which ads and keywords are successful for
+      you and which need to be improved. The more your keywords and ads relate to
+      each other and to your business, the more likely a user is to click on your
+      ad after searching on your keyword phrase.
     listen:
       Period: fact.period
+      Drill By: fact.drill_by
     row: 3
     col: 12
     width: 6
@@ -386,8 +412,13 @@
     defaults_version: 1
     series_types: {}
     hidden_fields: [last_fact.average_cost_per_click]
+    note_state: collapsed
+    note_display: hover
+    note_text: 'Cost-per-click (CPC) bidding means that you pay for each click on
+      your ads. '
     listen:
       Period: fact.period
+      Drill By: fact.drill_by
     row: 3
     col: 18
     width: 6
@@ -461,6 +492,7 @@
     title_hidden: true
     listen:
       Period: fact.period
+      Drill By: fact.drill_by
     row: 7
     col: 0
     width: 12
@@ -535,10 +567,134 @@
     title_hidden: true
     listen:
       Period: fact.period
+      Drill By: fact.drill_by
     row: 7
     col: 12
     width: 12
     height: 6
+  - title: ROAS
+    name: ROAS
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    type: single_value
+    fields: [fact.average_value_per_cost, last_fact.average_value_per_cost]
+    filters:
+      fact.date_period_latest: 'Yes'
+    limit: 500
+    dynamic_fields: [{table_calculation: diff, label: Diff, expression: "(${fact.average_value_per_cost}\
+          \ - ${last_fact.average_value_per_cost}) /   ${last_fact.average_value_per_cost}",
+        value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
+        _type_hint: number}]
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: true
+    show_comparison_label: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#4285F4",
+        font_color: !!null '', color_application: {collection_id: gooooooooogle, palette_id: gooooooooogle-sequential-0},
+        bold: false, italic: false, strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: []
+    listen:
+      Period: fact.period
+      Drill By: fact.drill_by
+    row: 17
+    col: 18
+    width: 6
+    height: 4
+  - title: Conversion Value
+    name: Conversion Value
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    type: single_value
+    fields: [fact.total_conversionvalue, last_fact.total_conversionvalue]
+    filters:
+      fact.date_period_latest: 'Yes'
+    limit: 500
+    dynamic_fields: [{table_calculation: diff, label: Diff, expression: "(${fact.total_conversionvalue}\
+          \ - ${last_fact.total_conversionvalue}) / ${last_fact.total_conversionvalue}",
+        value_format: !!null '', value_format_name: percent_2, _kind_hint: measure,
+        _type_hint: number}]
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: true
+    show_comparison_label: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: []
+    listen:
+      Period: fact.period
+      Drill By: fact.drill_by
+    row: 17
+    col: 12
+    width: 6
+    height: 4
   filters:
   - name: Period
     title: Period
@@ -553,3 +709,16 @@
     explore: ad_basic_stats
     listens_to_filters: []
     field: fact.period
+  - name: Drill By
+    title: Drill By
+    type: field_filter
+    default_value: campaign
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: radio_buttons
+      display: inline
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    listens_to_filters: []
+    field: fact.drill_by

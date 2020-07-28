@@ -106,6 +106,7 @@ view: campaign {
   }
 
   dimension: campaign_name {
+    drill_fields: [ad_group.ad_group_name]
     alias: [name]
     type: string
     sql: ${TABLE}.CampaignName ;;
