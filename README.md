@@ -1,113 +1,53 @@
 # Google Ads Block
+### What does this Block do for me?
 
-This repository contains views and explores used for the Google Ads Block dashboards.
-There are 5 dashboards that come with this block: Google Adwords Overview, Google Adwords - Clicks,
-Google Adwords - Conversions, Google Adwords - Impressions and Google Adwords - Spend. Each of the dashboards
-provides in-depth analysis of ad/campaign performance over a given timeframe.
+**(1) Combine Multiple Data Sources** - Combine your Google Ads data with data from GA, DoubleClick, Facebook Ads, Salesforce, and more to get a holistic view of all your customer data in one central view (see bottom of this page for instructions).
 
-This project is remotely included through the Google Ads Block Config project.
-To pull updates from this project, update the `ref:` parameter in the manifest file. It should point to the latest commit
-in [block-google-ads-tarnsfer](https://github.com/looker/block-google-ads-transfer/commits/master).
+**(2) Work with Complex Account Hierarchies** - Provides possibilities for custom permissions structures and singular views when you have MCC codes with thousands of accounts or perhaps multiple Data Transfer Service accounts going into multiple BigQuery projects.
 
-The LookML constants are used to specify the name of the schema and connection. They are defined in the Google Ads
-Block Config project.
-#### Account Structure
+**(3)Unbounded Custom Metrics** - With Looker's modeling language (LookML) there are no limitations to the kinds of complex custom metrics that can be created including filtered measures, measures that require advanced mathematical functions, custom groupings. Anything is possible.
 
-ad.view:
- - ad_adapter
-   - external_customer_id
-   - campaign_id
-   - ad_group_id
-   - creative_id
-   - creative
-   - status_active
+**(4) Take Advantage of Blocks Ecosystem** - Want to add powerful machine learning with BQML? Add the [BQML block](https://looker.com/platform/blocks/source/bigquery-machine-learning-by-google), there are 100s of blocks in the [blocks directory](https://looker.com/platform/directory/home).
 
-ad_group.view:
- - ad_group_adapter
-   - external_customer_id
-   - campaign_id
-   - ad_group_id
-   - ad_group_name
-   - status_active
+**(5) Enterprise Data Platform** - Take advantage of Looker's data platform functionality, including [data actions](https://looker.com/platform/actions), scheduling, permissions, alerting, parameterization (each user can only see their own data), and more. Get immediate alerts when budgets are exceeded, ads are underperforming, or any other business criteria.
 
-campaign.view:
- - campaign_adapter
-   - external_customer_id
-   - campaign_id
-   - campaign_name
-   - status_active
-   - budget_id
-   - amount
+**(6) Usable / Shareable Dashboards** - create centralized dashboards for the entire team, and departmental or individual dashboards for each user, and rest easy knowing everyone is looking at the same information at all times. Then schedule the dashboard for emails or alerts, period-end reporting, anomaly detection, or whatever else serves your use-case.
 
-customer.view:
- - customer_adapter
-   - external_customer_id
+### Block Info and Requirements
 
-#### Targeting Criteria
-geo.view
- - geotargeting
-   - state
-   - country_code
-   - name
-   - postal_code
+This Block is modeled on the schema brought in by Google [BigQuery Transfer Service for Google Ads](https://cloud.google.com/bigquery-transfer/docs/adwords-transfer).
 
-keyword.view
- - keyword_adapter
-   - external_customer_id
-   - campaign_id
-   - ad_group_id
-   - criterion_id
-   - criteria
-   - status_active
-   - bidding_strategy_type
+The schema documentation for Google Ads can be found in [Google's docs](https://developers.google.com/ads/api/docs/appendix/reports/). This block was developed with [Google Ads API v201809](https://developers.google.com/adwords/api/docs/appendix/reports/all-reports)
 
-#### Reports
+### Google Ads Raw Data Structure
 
-ad_impressions.view
- - _date
- - ad_network_type
- - device_type
- - cost
- - impressions
- - interactions
- - clicks
- - conversions
- - conversionvalue
- - averageposition
+* **Entity Tables and Stats Tables** - There are several primary entities included in the Google Ads data set, such as ad, ad group, campaign, customer, keyword, etc.. Each of these tables has a corresponding "Stats" table, which includes all the various metrics for that entity. For example, the "campaign" entity table contains attributes for each campaign, such as the campaign name and campaign status. The corresponding stats table - "Campaign Basic Stats" contains metrics such as impressions, clicks, and conversions.
 
-Account Stats
- - ad_impressions_adapter
- - ad_impressions_hour_adapter
-   - hour_of_day
+* **Snapshots** - Google Ads tables keep records over time by snapshotting all data at the end of each day. The following day, a new snapshot is taken, and appended to the table. There are two columns on each table: '_DATA_DATE' and '_LATEST_DATE'. '_DATA_DATE' tells you the day the data was recorded, while '_LATEST_DATE' is a **mutable** field that tells you the most recent date a snapshot was taken. Querying the table using '_DATA_DATE' = '_LATEST_DATE' in the 'WHERE' clause would give you only the data for the latest day.
 
-Campaign Stats
- - ad_impressions_campaign_adapter
- - ad_impressions_campaign_hour_adapter
-   - hour_of_day
+### Block Structure
 
-Ad Group Stats
- - ad_impressions_ad_group_adapter
- - ad_impressions_ad_group_hour_adapter
-   - hour_of_day
+* **upstream_views** - these are views coming directly from BigQuery (with minor modifications). Generate more files as needed and store them in this folder.
+* **shared_views** - These are common throughout the model
+** Test
 
-Keyword Stats
- - ad_impressions_keyword_adapter
+* **Entity Base** - This file contains all the common entity tables found across all Google Ads deployments. If you have additional entities you'd like to include, simply bring them into the Looker and model them the same way. Full documentation on each entity table and each metric can be found in [Google's documentation](https://developers.google.com/adwords/api/docs/appendix/reports).
 
-Ad Stats
- - ad_impressions_ad_adapter
+* **Master Basic Stats** - This file contains all the metrics (measures / aggregations) for each corresponding entity. Because Google Ads data exports were built with the intention of one-off reporting, rather than data modeling, we utilize Lookers 'in_query' function (Looker's approach to Aggregate Awareness) to tell Looker which table to query based on the dimensions and measures selected when exploring or viewing a dashboard. This allows us to optimize performance and leverage BigQuery's speed while still maintaining a robust, central data model. More detail on the 'in_query' function can be found in [Looker's documentation](https://discourse.looker.com/t/aggregate-awareness-using--in-query/6439).
 
-Targeting Reports
- - ad_impressions * [age_range, audience, gender, geo, parental_status, video]
+* **Base Quarter Stats** - Many customers prefer to view Google Ads data at the quarterly level to gauge performance and, more importantly, understand budget implications. This file contains several quarterly overviews to help users analyze performance and budget spend at the quarter interval.
 
+* **Model File and Joins** - Since all tables are snapshotted and appended each day, you'll notice that in our model file, all of our join logic is based on two conditions: on the common key, and on the date. This ensures that we never double count or misaggregate any calculations. Modifying these joins will break the aggregations. Any additional table that's joined should follow the same logic.
 
-### Block Info
+### Implementation Instructions / Required Customizations
 
-This Block is modeled on the schema from [Google's BigQuery Data Transfer Service for Google Ads](https://cloud.google.com/bigquery/docs/adwords-transfer).
-The schema documentation for AdWords can be found in [Google's docs](https://developers.google.com/adwords/api/docs/appendix/reports).
+* **sql_table_name** - in each of the views, the 'sql_table_name' parameter must be changed to match your table names. This is easily accomplished using a global Find & Replace (available in the top right of your screen)
+
+* **Dashboards** - rename the model in each LookML Dashboard element from "google_Google Ads" to the model name you've selected. We also recommend using a global Find & Replace for this.
 
 ### What if I find an error? Suggestions for improvements?
 
-Great! Blocks were designed for continuous improvement through the help of the entire Looker community and we'd love your input. To report an error or improvement recommendation, please reach out to Looker support via email to support@looker.com or via chat to submit a request. Please be as detailed as possible in your explanation and we'll address it as quick as we can.
+Great! Blocks were designed for continuous improvement through the help of the entire Looker community, and we'd love your input. To log an error or improvement recommendation, simply create a "New Issue" in the corresponding [Github repo for this Block](https://github.com/llooker/google_adwords/issues). Please be as detailed as possible in your explanation, and we'll address it as quick as we can.
 
 ### About Partitioning
 
