@@ -5,7 +5,7 @@
 
 **(2) Work with Complex Account Hierarchies** - Provides possibilities for custom permissions structures and singular views when you have MCC codes with thousands of accounts or perhaps multiple Data Transfer Service accounts going into multiple BigQuery projects.
 
-**(3)Unbounded Custom Metrics** - With Looker's modeling language (LookML) there are no limitations to the kinds of complex custom metrics that can be created including filtered measures, measures that require advanced mathematical functions, custom groupings. Anything is possible.
+**(3) Unbounded Custom Metrics** - With Looker's modeling language (LookML) there are no limitations to the kinds of complex custom metrics that can be created including filtered measures, measures that require advanced mathematical functions, custom groupings. Anything is possible.
 
 **(4) Take Advantage of Blocks Ecosystem** - Want to add powerful machine learning with BQML? Add the [BQML block](https://looker.com/platform/blocks/source/bigquery-machine-learning-by-google), there are 100s of blocks in the [blocks directory](https://looker.com/platform/directory/home).
 
@@ -25,6 +25,9 @@ The schema documentation for Google Ads can be found in [Google's docs](https://
 
 * **Snapshots** - Google Ads tables keep records over time by snapshotting all data at the end of each day. The following day, a new snapshot is taken, and appended to the table. There are two columns on each table: '_DATA_DATE' and '_LATEST_DATE'. '_DATA_DATE' tells you the day the data was recorded, while '_LATEST_DATE' is a **mutable** field that tells you the most recent date a snapshot was taken. Querying the table using '_DATA_DATE' = '_LATEST_DATE' in the 'WHERE' clause would give you only the data for the latest day.
 
+* **About Partitioning** Currently the block uses Views (i.e. AdBasicStats) not tables (i.e. p_AdBasicStats) - if you are using partitioning then consider changing to use the tables and add [partitioning logic](https://discourse.looker.com/t/analytic-block-partitioned-date-filters-in-bigquery/4380).
+
+
 ### Block Structure
 
 * **upstream_views** - these are views coming directly from BigQuery (with minor modifications). Generate more files as needed and store them in this folder.
@@ -41,12 +44,8 @@ The schema documentation for Google Ads can be found in [Google's docs](https://
 
 * **Multiple Accounts** - Union fact and dimension tables if you have multiple accounts. Use a persisted derived table to store the result of the union.
 
-* ** Add Stats and Entity tables ** - Only _ad_basic_stats_ is added as an example, other views should be imported and joined as needed.
+* **Add Stats and Entity tables** - Only _ad_basic_stats_ is added as an example, other views should be imported and joined as needed.
 
 ### What if I find an error? Suggestions for improvements?
 
 Great! Blocks were designed for continuous improvement through the help of the entire Looker community, and we'd love your input. To log an error or improvement recommendation, simply create a "New Issue" in the corresponding [Github repo for this Block](https://github.com/llooker/google_adwords/issues). Please be as detailed as possible in your explanation, and we'll address it as quick as we can.
-
-### About Partitioning
-
-Currently the block uses Views (i.e. AdBasicStats) not tables (i.e. p_AdBasicStats) - if you are using partitioning then consider changing to use the tables and add [partitioning logic](https://discourse.looker.com/t/analytic-block-partitioned-date-filters-in-bigquery/4380).
