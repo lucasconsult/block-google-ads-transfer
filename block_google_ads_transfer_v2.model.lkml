@@ -6,7 +6,7 @@ include: "lookml_dashboards/google_ads_pulse.dashboard"
 
 
 named_value_format: large_number { value_format: "[>=1000000]0.00,,\"M\";[>=1000]0.00,\"K\";0"}
-named_value_format: usd_large { value_format: "[>=1000000]$0.00,,\"M\";[>=1000]$0.00,\"K\";$0.00" }
+named_value_format: large_usd { value_format: "[>=1000000]$0.00,,\"M\";[>=1000]$0.00,\"K\";$0.00" }
 
 explore: ad_basic_stats {
   view_label: "Ad Performance (Current Period)"

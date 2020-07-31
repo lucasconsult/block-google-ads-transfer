@@ -110,6 +110,10 @@ view: campaign {
     alias: [name]
     type: string
     sql: ${TABLE}.CampaignName ;;
+    link: {
+      label: "See {{value}} Detail Dashboard"
+      url: "/dashboards-next/761?Campaign={{value}}"
+    }
   }
 
   dimension: campaign_status {

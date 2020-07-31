@@ -30,6 +30,10 @@ view: ads_common {
          null
       {% endcase %} ;;
       drill_fields: [customer.account_descriptive_name,campaign.campaign_name,ad_group.ad_group_name,keyword.criteria]
+    link: {
+      label: "See {{value}} Detail Dashboard"
+      url: "/dashboards-next/761?Campaign={{value}}"
+    }
   }
 
 
@@ -49,7 +53,7 @@ view: ads_common {
     description: "Cost per conversion."
     type: number
     sql: ${cost}*1.0 / NULLIF(${conversions},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, cost_per_conversion]
   }
 
@@ -59,7 +63,7 @@ view: ads_common {
     description: "Conv. Value per conversion."
     type: number
     sql: ${conversion_value}*1.0 / NULLIF(${conversions},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, value_per_conversion]
   }
 
@@ -69,7 +73,7 @@ view: ads_common {
     description: "Average cost per ad click."
     type: number
     sql: ${cost}*1.0 / NULLIF(${clicks},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, cost_per_click]
   }
 
@@ -79,7 +83,7 @@ view: ads_common {
     description: "Conv. Value per Click."
     type: number
     sql: ${conversion_value}*1.0 / NULLIF(${clicks},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, value_per_click]
   }
 
@@ -89,7 +93,7 @@ view: ads_common {
     description: "Average cost per 1000 ad impressions."
     type: number
     sql: ${cost}*1.0 / NULLIF(${impressions},0) * 1000.0 ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, cost_per_impression]
   }
 
@@ -99,7 +103,7 @@ view: ads_common {
     description: "Conv. Value per Impression."
     type: number
     sql: ${conversion_value}*1.0 / NULLIF(${impressions},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, average_value_per_impression]
 
   }
@@ -139,7 +143,7 @@ view: ads_common {
     description: "Cost per conversion."
     type: number
     sql: ${total_cost}*1.0 / NULLIF(${total_conversions},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field,average_cost_per_conversion]
   }
 
@@ -148,7 +152,7 @@ view: ads_common {
     description: "Cost per value."
     type: number
     sql: ${total_cost}*1.0 / NULLIF(${total_conversionvalue},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, average_cost_per_conversion]
   }
 
@@ -157,7 +161,7 @@ view: ads_common {
     description: "Average value per conversion."
     type: number
     sql: ${total_conversionvalue}*1.0 / NULLIF(${total_conversions},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, average_value_per_conversion]
   }
 
@@ -166,7 +170,7 @@ view: ads_common {
     description: "Average cost per ad click."
     type: number
     sql: ${total_cost}*1.0 / NULLIF(${total_clicks},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, average_cost_per_click]
   }
 
@@ -175,7 +179,7 @@ view: ads_common {
     description: "Average value per ad click."
     type: number
     sql: ${total_conversionvalue}*1.0 / NULLIF(${total_clicks},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field,average_value_per_click]
   }
 
@@ -184,7 +188,7 @@ view: ads_common {
     description: "Average cost per ad impression viewed."
     type: number
     sql: ${total_cost}*1.0 / NULLIF(${total_impressions},0) * 1000.0 ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field,average_cost_per_impression]
   }
 
@@ -193,7 +197,7 @@ view: ads_common {
     description: "Average value per ad impression viewed."
     type: number
     sql: ${total_conversionvalue}*1.0 / NULLIF(${total_impressions},0) ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field,average_value_per_impression]
   }
 
@@ -219,7 +223,7 @@ view: ads_common {
     type: running_total
     sql: ${total_cost} ;;
     drill_fields: [drill_field, total_cost]
-    value_format_name: usd_large
+    value_format_name: large_usd
     direction: "column"
   }
 
@@ -254,7 +258,7 @@ view: ads_common {
     description: "Total conversion value."
     type: sum
     sql: ${conversion_value} ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, total_conversionvalue]
   }
 
@@ -263,7 +267,7 @@ view: ads_common {
     description: "Total cost."
     type: sum
     sql: ${cost} ;;
-    value_format_name: usd_large
+    value_format_name: large_usd
     drill_fields: [drill_field, total_cost]
   }
 
