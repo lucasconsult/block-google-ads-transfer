@@ -58,6 +58,7 @@
     listen:
       Period: fact.period
       Drill By: fact.drill_by
+      Ad Group Name: ad_group.ad_group_name
     row: 17
     col: 0
     width: 6
@@ -122,6 +123,7 @@
     listen:
       Period: fact.period
       Drill By: fact.drill_by
+      Ad Group Name: ad_group.ad_group_name
     row: 17
     col: 6
     width: 6
@@ -217,6 +219,7 @@
     listen:
       Period: fact.period
       Drill By: fact.drill_by
+      Ad Group Name: ad_group.ad_group_name
     row: 3
     col: 0
     width: 6
@@ -283,6 +286,7 @@
     listen:
       Period: fact.period
       Drill By: fact.drill_by
+      Ad Group Name: ad_group.ad_group_name
     row: 3
     col: 6
     width: 6
@@ -352,6 +356,7 @@
     listen:
       Period: fact.period
       Drill By: fact.drill_by
+      Ad Group Name: ad_group.ad_group_name
     row: 3
     col: 12
     width: 6
@@ -419,6 +424,7 @@
     listen:
       Period: fact.period
       Drill By: fact.drill_by
+      Ad Group Name: ad_group.ad_group_name
     row: 3
     col: 18
     width: 6
@@ -493,6 +499,7 @@
     listen:
       Period: fact.period
       Drill By: fact.drill_by
+      Ad Group Name: ad_group.ad_group_name
     row: 7
     col: 0
     width: 12
@@ -568,6 +575,7 @@
     listen:
       Period: fact.period
       Drill By: fact.drill_by
+      Ad Group Name: ad_group.ad_group_name
     row: 7
     col: 12
     width: 12
@@ -631,6 +639,7 @@
     listen:
       Period: fact.period
       Drill By: fact.drill_by
+      Ad Group Name: ad_group.ad_group_name
     row: 17
     col: 18
     width: 6
@@ -691,6 +700,7 @@
     listen:
       Period: fact.period
       Drill By: fact.drill_by
+      Ad Group Name: ad_group.ad_group_name
     row: 17
     col: 12
     width: 6
@@ -722,3 +732,16 @@
     explore: ad_basic_stats
     listens_to_filters: []
     field: fact.drill_by
+  - name: Ad Group Name
+    title: Ad Group Name
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+    model: block_google_ads_transfer_v2
+    explore: ad_basic_stats
+    listens_to_filters: []
+    field: ad_group.ad_group_name
