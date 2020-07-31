@@ -15,7 +15,7 @@
 
 ### Block Info and Requirements
 
-This Block is modeled on the schema brought in by Google [BigQuery Transfer Service for Google Ads](https://cloud.google.com/bigquery-transfer/docs/adwords-transfer). This block does not cover every table in the Google Ads schema, it’s designed to help you begin modeling complex structure of the BigQuery data transfer for Google Ads.
+This Block is modeled on the schema brought in by Google [BigQuery Transfer Service for Google Ads](https://cloud.google.com/bigquery-transfer/docs/adwords-transfer). This block does not cover every table in the Google Ads schema, it’s designed to help you begin modeling the complex structure of the BigQuery data transfer for Google Ads.
 
 
 
