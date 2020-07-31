@@ -21,7 +21,7 @@ The schema documentation for Google Ads can be found in [Google's docs](https://
 
 ### Google Ads Raw Data Structure
 
-* **Entity Tables and Stats Tables** - There are several primary entities included in the Google Ads data set, such as ad, ad group, campaign, customer, keyword, etc.. Each of these tables has a corresponding "Stats" table, which includes all the various metrics for that entity. For example, the "campaign" entity table contains attributes for each campaign, such as the campaign name and campaign status. The corresponding stats table - "Campaign Basic Stats" contains metrics such as impressions, clicks, and conversions.
+* **Entity Tables and Stats Tables** - There are several primary entities included in the Google Ads data set, such as ad, ad group, campaign, customer, keyword, etc.. Each of these tables has a corresponding _Stats_ table, which includes all the various metrics for that entity. For example, the _campaign_ entity table contains attributes for each campaign, such as the campaign name and campaign status. The corresponding stats table - "Campaign Basic Stats" contains metrics such as impressions, clicks, and conversions.
 
 * **Snapshots** - Google Ads tables keep records over time by snapshotting all data at the end of each day. The following day, a new snapshot is taken, and appended to the table. There are two columns on each table: '_DATA_DATE' and '_LATEST_DATE'. '_DATA_DATE' tells you the day the data was recorded, while '_LATEST_DATE' is a **mutable** field that tells you the most recent date a snapshot was taken. Querying the table using '_DATA_DATE' = '_LATEST_DATE' in the 'WHERE' clause would give you only the data for the latest day.
 
@@ -29,21 +29,19 @@ The schema documentation for Google Ads can be found in [Google's docs](https://
 
 * **upstream_views** - these are views coming directly from BigQuery (with minor modifications). Generate more files as needed and store them in this folder.
 * **shared_views** - These are common throughout the model
-** Test
+  * **date_base & period_base** - These are used to provide period over period comparisons
+  * **ads_common** - This file contains common metrics in Ads fact tables
 
 * **Entity Base** - This file contains all the common entity tables found across all Google Ads deployments. If you have additional entities you'd like to include, simply bring them into the Looker and model them the same way. Full documentation on each entity table and each metric can be found in [Google's documentation](https://developers.google.com/adwords/api/docs/appendix/reports).
 
-* **Master Basic Stats** - This file contains all the metrics (measures / aggregations) for each corresponding entity. Because Google Ads data exports were built with the intention of one-off reporting, rather than data modeling, we utilize Lookers 'in_query' function (Looker's approach to Aggregate Awareness) to tell Looker which table to query based on the dimensions and measures selected when exploring or viewing a dashboard. This allows us to optimize performance and leverage BigQuery's speed while still maintaining a robust, central data model. More detail on the 'in_query' function can be found in [Looker's documentation](https://discourse.looker.com/t/aggregate-awareness-using--in-query/6439).
-
-* **Base Quarter Stats** - Many customers prefer to view Google Ads data at the quarterly level to gauge performance and, more importantly, understand budget implications. This file contains several quarterly overviews to help users analyze performance and budget spend at the quarter interval.
-
-* **Model File and Joins** - Since all tables are snapshotted and appended each day, you'll notice that in our model file, all of our join logic is based on two conditions: on the common key, and on the date. This ensures that we never double count or misaggregate any calculations. Modifying these joins will break the aggregations. Any additional table that's joined should follow the same logic.
 
 ### Implementation Instructions / Required Customizations
 
-* **sql_table_name** - in each of the views, the 'sql_table_name' parameter must be changed to match your table names. This is easily accomplished using a global Find & Replace (available in the top right of your screen)
+* **Manifest file** - The manifest file contains [constants](https://docs.looker.com/reference/manifest-params/constant) that should be adapted to your BigQuery project and account numbers.
 
-* **Dashboards** - rename the model in each LookML Dashboard element from "google_Google Ads" to the model name you've selected. We also recommend using a global Find & Replace for this.
+* **Multiple Accounts** - Union fact and dimension tables if you have multiple accounts. Use a persisted derived table to store the result of the union.
+
+* ** Add Stats and Entity tables ** - Only _ad_basic_stats_ is added as an example, other views should be imported and joined as needed.
 
 ### What if I find an error? Suggestions for improvements?
 
