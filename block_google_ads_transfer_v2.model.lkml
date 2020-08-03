@@ -1,6 +1,7 @@
 connection: "@{CONNECTION_NAME}"
 
 include: "upstream_views/*"
+include: "pdts/*"
 #include: "lookml_dashboards/*"
 include: "lookml_dashboards/google_ads_pulse.dashboard"
 
@@ -88,7 +89,6 @@ explore: ad_basic_stats {
   }
 
 }
-
 
 
 
