@@ -16,16 +16,16 @@ view: timeseries_data {
         value: ""
       }
     }
-    sql_trigger_value: select 1 ;;
+    sql_trigger_value: select current_date ;;
   }
   dimension: total_clicks {
-    label: "Ad Performance (Current Period) Clicks"
+    #label: "Ad Performance (Current Period) Clicks"
     description: "Total ad clicks."
     #value_format: "[>=1000000]0.00,,"M";[>=1000]0.00,"K";0"
     type: number
   }
   dimension: date {
-    label: "Ad Performance (Current Period)  Date"
+    #label: "Ad Performance (Current Period)  Date"
     type: date
   }
 }
@@ -33,7 +33,8 @@ view: timeseries_data {
 view: arima {
   # 2019-08-21 Bruce - Set max iterations down to 50 from 100.  Getting error saying max allowable is 50
   derived_table: {
-    datagroup_trigger: sweet_datagroup
+    #datagroup_trigger: sweet_datagroup
+    sql_trigger_value: select 1 ;;
     sql_create:
       CREATE OR REPLACE MODEL ${SQL_TABLE_NAME}
       OPTIONS
@@ -43,26 +44,70 @@ view: arima {
         auto_arima = TRUE,
         data_frequency = 'AUTO_FREQUENCY'
       ) AS
+
       SELECT
-       *
+        date,
+        SUM(total_clicks) AS total_clicks
       FROM
        ${timeseries_data.SQL_TABLE_NAME}
       GROUP BY date;;
   }
 }
 
+explore: arima_eval {}
 view: arima_eval  {
   #Inspect the evaluation metrics of all evaluated models
-derived_table: {
+  derived_table: {
   sql: SELECT
- *
-FROM
- ML.EVALUATE(MODEL ${arima.SQL_TABLE_NAME}) ;;
-}
+      *
+      FROM
+    ML.EVALUATE(MODEL ${arima.SQL_TABLE_NAME}) ;;
+  }
+
+  dimension: non_seasonal_p {
+    type: number
+    sql: ${TABLE}.non_seasonal_p ;;
+  }
+
+  dimension: non_seasonal_d {
+    type: number
+    sql: ${TABLE}.non_seasonal_d ;;
+  }
+
+  dimension: non_seasonal_q {
+    type: number
+    sql: ${TABLE}.non_seasonal_q ;;
+  }
+
+  dimension: has_drift {
+    type: string
+    sql: ${TABLE}.has_drift ;;
+  }
+
+  dimension: log_likelihood {
+    type: number
+    sql: ${TABLE}.log_likelihood ;;
+  }
+
+  dimension: aic {
+    type: number
+    sql: ${TABLE}.AIC ;;
+  }
+
+  dimension: variance {
+    type: number
+    sql: ${TABLE}.variance ;;
+  }
+
+  dimension: seasonal_periods {
+    type: string
+    sql: ${TABLE}.seasonal_periods ;;
+  }
 
 }
 
 
+explore:arima_coef  {}
 view: arima_coef  {
   #Inspect the evaluation metrics of all evaluated models
   derived_table: {
@@ -70,6 +115,21 @@ view: arima_coef  {
  *
 FROM
  ML.ARIMA_COEFFICIENTS(MODEL ${arima.SQL_TABLE_NAME}) ;;
+  }
+
+  dimension: ar_coefficients {
+    type: number
+    sql: ${TABLE}.ar_coefficients ;;
+  }
+
+  dimension: ma_coefficients {
+    type: number
+    sql: ${TABLE}.ma_coefficients ;;
+  }
+
+  dimension: intercept_or_drift {
+    type: number
+    sql: ${TABLE}.intercept_or_drift ;;
   }
 
 }
@@ -82,11 +142,53 @@ FROM
   ML.FORECAST(MODEL ${arima.SQL_TABLE_NAME},
               STRUCT(30 AS horizon, 0.8 AS confidence_level)) ;;
   }
+
+  dimension_group: forecast_timestamp {
+    type: time
+    sql: ${TABLE}.forecast_timestamp ;;
+  }
+
+  dimension: forecast_value {
+    type: number
+    sql: ${TABLE}.forecast_value ;;
+  }
+
+  dimension: standard_error {
+    type: number
+    sql: ${TABLE}.standard_error ;;
+  }
+
+  dimension: confidence_level {
+    type: number
+    sql: ${TABLE}.confidence_level ;;
+  }
+
+  dimension: prediction_interval_lower_bound {
+    type: number
+    sql: ${TABLE}.prediction_interval_lower_bound ;;
+  }
+
+  dimension: prediction_interval_upper_bound {
+    type: number
+    sql: ${TABLE}.prediction_interval_upper_bound ;;
+  }
+
+  dimension: confidence_interval_lower_bound {
+    type: number
+    sql: ${TABLE}.confidence_interval_lower_bound ;;
+  }
+
+  dimension: confidence_interval_upper_bound {
+    type: number
+    sql: ${TABLE}.confidence_interval_upper_bound ;;
+  }
 }
 
+explore: arima_forecast_results {}
 
 view: arima_forecast_results {
   derived_table: {
+    sql_trigger_value: select 1 ;;
     sql:
 SELECT
  history_timestamp AS timestamp,
@@ -97,8 +199,8 @@ SELECT
 FROM
  (
    SELECT
-     PARSE_TIMESTAMP("%Y%m%d", date) AS history_timestamp,
-     total_cliocks AS history_value
+     date AS history_timestamp,
+     sum(total_clicks) AS history_value
    FROM
      ${timeseries_data.SQL_TABLE_NAME}
    GROUP BY date
@@ -115,4 +217,55 @@ FROM
  ML.FORECAST(MODEL ${arima.SQL_TABLE_NAME},
              STRUCT(30 AS horizon, 0.8 AS confidence_level));;
   }
+
+
+  dimension_group: timestamp {
+    type: time
+    sql: ${TABLE}.timestamp ;;
+  }
+
+  dimension: history_value {
+    type: number
+    sql: ${TABLE}.history_value ;;
+  }
+
+  dimension: forecast_value {
+    type: number
+    sql: ${TABLE}.forecast_value ;;
+  }
+
+  dimension: prediction_interval_lower_bound {
+    type: number
+    sql: ${TABLE}.prediction_interval_lower_bound ;;
+  }
+
+  dimension: prediction_interval_upper_bound {
+    type: number
+    sql: ${TABLE}.prediction_interval_upper_bound ;;
+  }
+
+
+  dimension: clicks {
+    sql:ROUND(IFNULL(${history_value},0) + IFNULL(${forecast_value},0));;
+    type: number
+  }
+
+  ####
+  measure: total_clicks_forecasted {
+    type: sum
+    sql: ${forecast_value} ;;
+  }
+
+  measure: total_clicks_history {
+    type: sum
+    sql: ${history_value} ;;
+  }
+
+
+
+
+
+
+
+
 }
