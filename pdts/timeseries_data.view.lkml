@@ -246,19 +246,19 @@ FROM
 
 
   dimension: clicks {
-    sql:ROUND(IFNULL(${history_value},0) + IFNULL(${forecast_value},0));;
+    sql: ROUND(IFNULL${history_value},0) + IFNULL(${forecast_value},0));;
     type: number
   }
 
   ####
   measure: total_clicks_forecasted {
-    type: sum
-    sql: ${forecast_value} ;;
+    type: number
+    sql: nullif(sum(${forecast_value}),0);;
   }
 
   measure: total_clicks_history {
-    type: sum
-    sql: ${history_value} ;;
+    type: number
+    sql: nullif(sum(${history_value}),0) ;;
   }
 
 
