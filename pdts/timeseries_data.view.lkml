@@ -54,7 +54,7 @@ view: arima {
   }
 }
 
-explore: arima_eval {}
+#explore: arima_eval {}
 view: arima_eval  {
   #Inspect the evaluation metrics of all evaluated models
   derived_table: {
@@ -107,7 +107,7 @@ view: arima_eval  {
 }
 
 
-explore:arima_coef  {}
+#explore:arima_coef  {}
 view: arima_coef  {
   #Inspect the evaluation metrics of all evaluated models
   derived_table: {
