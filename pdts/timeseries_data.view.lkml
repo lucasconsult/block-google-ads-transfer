@@ -2,6 +2,35 @@
 # include: "block_google_ads_transfer_v2.model.lkml"
 
 explore: timeseries_data {}
+
+# If necessary, uncomment the line below to include explore_source.
+# include: "block_google_ads_transfer_v2.model.lkml"
+
+view: timeseries_training_data {
+  derived_table: {
+    explore_source: ad_basic_stats {
+      column: date { field: fact.date_date }
+      column: total_clicks { field: fact.total_clicks }
+      filters: {
+        field: fact.date_date
+        value: "364 days ago for 363 days"
+      }
+    }
+  }
+  dimension: date {
+    #label: "Ad Performance (Current Period)  Date"
+    type: date
+  }
+  dimension: total_clicks {
+    #label: "Ad Performance (Current Period) Clicks"
+    description: "Total ad clicks."
+    #value_format: "[>=1000000]0.00,,"M";[>=1000]0.00,"K";0"
+    type: number
+  }
+}
+
+
+
 view: timeseries_data {
   derived_table: {
     explore_source: ad_basic_stats {
@@ -34,7 +63,7 @@ view: arima {
   # 2019-08-21 Bruce - Set max iterations down to 50 from 100.  Getting error saying max allowable is 50
   derived_table: {
     #datagroup_trigger: sweet_datagroup
-    sql_trigger_value: select 1 ;;
+    sql_trigger_value: select current_date ;;
     sql_create:
       CREATE OR REPLACE MODEL ${SQL_TABLE_NAME}
       OPTIONS
@@ -49,7 +78,7 @@ view: arima {
         date,
         SUM(total_clicks) AS total_clicks
       FROM
-       ${timeseries_data.SQL_TABLE_NAME}
+       ${timeseries_training_data.SQL_TABLE_NAME}
       GROUP BY date;;
   }
 }
@@ -188,7 +217,7 @@ explore: arima_forecast_results {}
 
 view: arima_forecast_results {
   derived_table: {
-    sql_trigger_value: select 1 ;;
+    sql_trigger_value: select current_date ;;
     sql:
 SELECT
  history_timestamp AS timestamp,
@@ -246,11 +275,24 @@ FROM
 
 
   dimension: clicks {
-    sql: ROUND(IFNULL${history_value},0) + IFNULL(${forecast_value},0));;
+    sql: ROUND(IFNULL(${history_value},0) + IFNULL(${forecast_value},0));;
     type: number
   }
 
   ####
+
+  measure: lower_bound {
+    type: sum
+    sql: ${prediction_interval_lower_bound} ;;
+  }
+
+  measure: upper_bound {
+    type: sum
+    sql: ${prediction_interval_upper_bound} ;;
+  }
+
+
+
   measure: total_clicks_forecasted {
     type: number
     sql: nullif(sum(${forecast_value}),0);;
