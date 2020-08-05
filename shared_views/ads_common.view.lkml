@@ -9,6 +9,7 @@ view: ads_common {
     allowed_value: { label: "Account" value: "account" }
     allowed_value: { label: "Campaign" value: "campaign" }
     allowed_value: { label: "Ad Group" value: "ad_group" }
+    allowed_value: { label: "Ad Desc." value: "ad" }
     allowed_value: { label: "Keyword" value: "keyword" }
   }
 
@@ -24,12 +25,14 @@ view: ads_common {
           ${campaign.campaign_name}
         {% when "'ad_group'" %}
           ${ad_group.ad_group_name}
+        {% when "'ad'" %}
+          ${ad.description}
         {% when "'keyword'" %}
           ${keyword.criteria}
         {% else %}
          null
       {% endcase %} ;;
-      drill_fields: [customer.account_descriptive_name,campaign.campaign_name,ad_group.ad_group_name,keyword.criteria]
+      drill_fields: [customer.account_descriptive_name,campaign.campaign_name,ad_group.ad_group_name,ad.description,keyword.criteria]
     link: {
       label: "See {{value}} Detail Dashboard"
       url: "/dashboards-next/761?Campaign={{value}}"

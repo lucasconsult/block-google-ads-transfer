@@ -149,6 +149,7 @@ view: ad {
   dimension: description {
     type: string
     sql: ${TABLE}.Description ;;
+    drill_fields: [keyword.criteria]
   }
 
   dimension: description1 {
