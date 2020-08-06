@@ -1,6 +1,11 @@
 view: ad {
-  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Ad_@{GOOGLE_ADS_CUSTOMER_ID}`
-    ;;
+  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Ad_@{GOOGLE_ADS_CUSTOMER_ID}` ;;
+
+  dimension: primary_key {
+    primary_key: yes
+    hidden: yes
+    sql: concat(${_data_raw},${ad_group_id},${campaign_id},${creative_id},${description1}) ;;
+  }
 
   dimension_group: _data {
     hidden: yes
@@ -497,7 +502,7 @@ view: ad {
     sql: ${TABLE}.UniversalAppAdYouTubeVideos ;;
   }
 
-  measure: count {
+  measure: number_of_ads {
     type: count
     drill_fields: [multi_asset_responsive_display_ad_business_name, business_name, gmail_teaser_business_name, image_creative_name]
   }
