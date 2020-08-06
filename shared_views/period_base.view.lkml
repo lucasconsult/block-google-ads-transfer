@@ -32,7 +32,7 @@ view: period_base {
   dimension: in_date_range {
     hidden: yes
     type: yesno
-    sql: {% condition date_range %}CAST(${fact.date_raw} AS TIMESTAMP){% endcondition %} ;;
+    sql: {% condition date_range %}${fact.date_raw}{% endcondition %} ;;
   }
 
   dimension: date_range_day_of_range_prior {
@@ -96,7 +96,7 @@ view: period_base {
     convert_tz: no
     label_from_parameter: period
     group_label: "Event"
-    sql: TIMESTAMP({% if fact.period._parameter_value contains "day" %}
+    sql: {% if fact.period._parameter_value contains "day" %}
         {% if fact.period._parameter_value == "'7 day'" %}${date_date_7_days_prior}
         {% elsif fact.period._parameter_value == "'28 day'" %}${date_date_28_days_prior}
         {% elsif fact.period._parameter_value == "'91 day'" %}${date_date_91_days_prior}
@@ -107,7 +107,7 @@ view: period_base {
       {% elsif fact.period._parameter_value contains "month" %}${date_month_date}
       {% elsif fact.period._parameter_value contains "quarter" %}${date_quarter_date}
       {% elsif fact.period._parameter_value contains "year" %}${date_year_date}
-      {% endif %}) ;;
+      {% endif %} ;;
     allow_fill: no
   }
   dimension: date_end_of_period {
@@ -115,7 +115,7 @@ view: period_base {
     convert_tz: no
     label_from_parameter: period
     group_label: "Event"
-    sql: TIMESTAMP({% if fact.period._parameter_value contains "day" %}
+    sql: {% if fact.period._parameter_value contains "day" %}
         {% if fact.period._parameter_value == "'7 day'" %}DATE_ADD(${date_period}, INTERVAL 7 DAY)
         {% elsif fact.period._parameter_value == "'28 day'" %}DATE_ADD(${date_period}, INTERVAL 28 DAY)
         {% elsif fact.period._parameter_value == "'91 day'" %}DATE_ADD(${date_period}, INTERVAL 91 DAY)
@@ -126,7 +126,7 @@ view: period_base {
       {% elsif fact.period._parameter_value contains "month" %}DATE_ADD(${date_period}, INTERVAL 1 MONTH)
       {% elsif fact.period._parameter_value contains "quarter" %}DATE_ADD(${date_period}, INTERVAL 1 QUARTER)
       {% elsif fact.period._parameter_value contains "year" %}DATE_ADD(${date_period}, INTERVAL 1 YEAR)
-      {% endif %}) ;;
+      {% endif %} ;;
     allow_fill: no
   }
   dimension: date_period_latest {

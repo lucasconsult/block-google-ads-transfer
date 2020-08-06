@@ -18,7 +18,7 @@ explore: ad_basic_stats {
   conditionally_filter: {
     filters: [
                 fact.period: "28 day",
-                fact.date_period_latest: "yes"
+                fact.date_period_latest: "Yes"
               ]
     unless: [fact.date_date]
   }

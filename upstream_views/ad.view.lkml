@@ -4,7 +4,7 @@ view: ad {
   dimension: primary_key {
     primary_key: yes
     hidden: yes
-    sql: concat(${_data_raw},${ad_group_id},${campaign_id},${creative_id},${description1}) ;;
+    sql: CONCAT(${campaign_id},${creative_id}) ;;
   }
 
   dimension_group: _data {
@@ -502,8 +502,18 @@ view: ad {
     sql: ${TABLE}.UniversalAppAdYouTubeVideos ;;
   }
 
+
+
   measure: number_of_ads {
+    description: "includes all statuses (PAUSED, ENABLED, DISABLED)"
     type: count
-    drill_fields: [multi_asset_responsive_display_ad_business_name, business_name, gmail_teaser_business_name, image_creative_name]
   }
+
+  measure: number_of_enabled_ads {
+    description: "includes only status (ENABLED)"
+    filters: [status: "ENABLED"]
+    type: count
+  }
+
+  drill_fields:   [campaign.campaign_name,ad_group.ad_group_name,description,display_url]
 }

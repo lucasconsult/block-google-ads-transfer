@@ -13,7 +13,7 @@ view: ad_basic_stats {
 
   dimension: _date {
     hidden: yes
-    type: date_raw
+    type: date
     sql: ${TABLE}._DATA_DATE ;;
   }
 
