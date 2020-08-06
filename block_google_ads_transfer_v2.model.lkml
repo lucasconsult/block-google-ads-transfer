@@ -87,7 +87,11 @@ explore: ad_basic_stats {
       ${campaign.latest};;
     relationship: many_to_one
   }
-
+join: budget {
+  view_label: "Budget"
+  sql_on: ${campaign.budget_id}=${budget.budget_id} AND  ${budget._data_date} = ${fact._data_date} ;;
+  relationship: many_to_one
+}
 }
 
 
