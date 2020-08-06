@@ -107,14 +107,25 @@ dimension: prim_key {
     type: yesno
     sql: ${_data_raw} = ${_latest_raw} ;;
   }
-# Ernesto pls check
+
 measure: bu_amount {
   view_label: "Budget"
+  label: "Budget"
   type: sum
   value_format_name: large_usd
-#  filters: [latest: "yes"]
   sql: ${amount} ;;
 }
+
+  measure: Current_Budget {
+    view_label: "Current Budget"
+    label: "Current Budget"
+    type: average
+    value_format_name: large_usd
+  filters: [latest: "yes"]
+    sql: ${amount} ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [account_descriptive_name, budget_name]
