@@ -96,6 +96,7 @@ view: campaign {
   }
 
   dimension: campaign_id {
+    primary_key: yes
     type: number
     sql: ${TABLE}.CampaignId ;;
   }
@@ -233,7 +234,7 @@ view: campaign {
     sql: ${TABLE}.UrlCustomParameters ;;
   }
 
-  measure: count {
+  measure: number_of_campaigns {
     type: count
     drill_fields: [campaign_name, bidding_strategy_name]
   }
