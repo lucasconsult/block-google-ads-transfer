@@ -40,6 +40,21 @@ view: campaign {
     sql: ${_data_raw} = ${_latest_raw} ;;
   }
 
+  filter: campaign_selector {
+    description: "use with campaign comparitor"
+    suggest_dimension: campaign.campaign_name
+  }
+
+  dimension: campaign_comparitor {
+    description: "use this with the campaign selector filter for comparisons against population"
+    type: string
+    sql:
+    CASE
+      WHEN {% condition campaign_selector %} ${campaign_name} {% endcondition %}
+        THEN ${campaign_name}
+      ELSE 'Rest of Campaigns'
+    END ;;
+  }
 
   dimension: advertising_channel_sub_type {
     group_label: "Campaign Attributes"
@@ -96,6 +111,7 @@ view: campaign {
   }
 
   dimension: campaign_id {
+    primary_key: yes
     type: number
     sql: ${TABLE}.CampaignId ;;
   }
@@ -233,7 +249,7 @@ view: campaign {
     sql: ${TABLE}.UrlCustomParameters ;;
   }
 
-  measure: count {
+  measure: number_of_campaigns {
     type: count
     drill_fields: [campaign_name, bidding_strategy_name]
   }

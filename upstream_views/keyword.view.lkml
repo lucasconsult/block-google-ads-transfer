@@ -2,6 +2,13 @@ view: keyword {
 
   sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Keyword_@{GOOGLE_ADS_CUSTOMER_ID}`    ;;
 
+  dimension: primary_key {
+    type: string
+    hidden: yes
+    primary_key: yes
+    sql: CONCAT(${criterion_id},${campaign_id},${ad_group_id}) ;;
+  }
+
 
   dimension_group: _data {
     hidden: yes
@@ -43,6 +50,7 @@ view: keyword {
 
 
   dimension: ad_group_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.AdGroupId ;;
   }
@@ -58,6 +66,7 @@ view: keyword {
   }
 
   dimension: bidding_strategy_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.BiddingStrategyId ;;
   }
@@ -78,6 +87,7 @@ view: keyword {
   }
 
   dimension: campaign_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.CampaignId ;;
   }
@@ -120,6 +130,7 @@ view: keyword {
   }
 
   dimension: criterion_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.CriterionId ;;
   }
@@ -140,6 +151,7 @@ view: keyword {
   }
 
   dimension: external_customer_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.ExternalCustomerId ;;
   }
@@ -240,12 +252,17 @@ view: keyword {
   }
 
   dimension: vertical_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.VerticalId ;;
   }
 
-  measure: count {
+  measure: number_of_enabled_keywords {
     type: count
-    drill_fields: [bidding_strategy_name]
+    filters: [status: "ENABLED"]
   }
+
+  drill_fields:   [campaign.campaign_name,ad_group.ad_group_name,criteria,criteria_destination_url]
+
+
 }
