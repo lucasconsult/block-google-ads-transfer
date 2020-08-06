@@ -62,6 +62,7 @@ view: ad {
   }
 
   dimension: ad_group_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.AdGroupId ;;
   }
@@ -102,6 +103,7 @@ view: ad {
   }
 
   dimension: campaign_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.CampaignId ;;
   }
@@ -137,6 +139,7 @@ view: ad {
   }
 
   dimension: creative_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.CreativeId ;;
   }
@@ -213,6 +216,7 @@ view: ad {
   }
 
   dimension: external_customer_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.ExternalCustomerId ;;
   }
@@ -293,6 +297,7 @@ view: ad {
   }
 
   dimension: label_ids {
+    hidden: yes
     type: string
     sql: ${TABLE}.LabelIds ;;
   }
