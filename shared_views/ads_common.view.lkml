@@ -274,6 +274,15 @@ view: ads_common {
     drill_fields: [drill_field, total_cost]
   }
 
+  measure: avg_cost {
+    label: "avg. Cost"
+    description: "Average cost."
+    type: average
+    sql: ${cost} ;;
+    value_format_name: large_usd
+    drill_fields: [drill_field, total_cost]
+  }
+
   measure: total_impressions {
     label: "Impressions"
     description: "Total ad impressions."
