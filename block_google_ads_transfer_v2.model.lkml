@@ -5,7 +5,10 @@ include: "pdts/*"
 #include: "lookml_dashboards/*"
 include: "lookml_dashboards/google_ads_pulse.dashboard"
 
-
+datagroup: daily {
+  sql_trigger: SELECT current_date ;;
+  max_cache_age: "24 hours"
+}
 named_value_format: large_number { value_format: "[>=1000000]0.00,,\"M\";[>=1000]0.00,\"K\";0"}
 named_value_format: large_usd { value_format: "[>=1000000]$0.00,,\"M\";[>=1000]$0.00,\"K\";$0.00" }
 
@@ -92,4 +95,8 @@ join: budget {
   sql_on: ${campaign.budget_id}=${budget.budget_id} AND  ${budget._data_date} = ${fact._data_date} ;;
   relationship: many_to_one
 }
+}
+
+explore: clicks_fraud_analysis {
+  description: "Clicks forecast and fraud analysis"
 }
