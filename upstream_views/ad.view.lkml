@@ -1,6 +1,11 @@
 view: ad {
-  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Ad_@{GOOGLE_ADS_CUSTOMER_ID}`
-    ;;
+  sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Ad_@{GOOGLE_ADS_CUSTOMER_ID}` ;;
+
+  dimension: primary_key {
+    primary_key: yes
+    hidden: yes
+    sql: CONCAT(${campaign_id},${creative_id}) ;;
+  }
 
   dimension_group: _data {
     hidden: yes
@@ -57,6 +62,7 @@ view: ad {
   }
 
   dimension: ad_group_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.AdGroupId ;;
   }
@@ -97,6 +103,7 @@ view: ad {
   }
 
   dimension: campaign_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.CampaignId ;;
   }
@@ -132,6 +139,7 @@ view: ad {
   }
 
   dimension: creative_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.CreativeId ;;
   }
@@ -208,6 +216,7 @@ view: ad {
   }
 
   dimension: external_customer_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.ExternalCustomerId ;;
   }
@@ -288,6 +297,7 @@ view: ad {
   }
 
   dimension: label_ids {
+    hidden: yes
     type: string
     sql: ${TABLE}.LabelIds ;;
   }
@@ -497,8 +507,18 @@ view: ad {
     sql: ${TABLE}.UniversalAppAdYouTubeVideos ;;
   }
 
-  measure: count {
+
+
+  measure: number_of_ads {
+    description: "includes all statuses (PAUSED, ENABLED, DISABLED)"
     type: count
-    drill_fields: [multi_asset_responsive_display_ad_business_name, business_name, gmail_teaser_business_name, image_creative_name]
   }
+
+  measure: number_of_enabled_ads {
+    description: "includes only status (ENABLED)"
+    filters: [status: "ENABLED"]
+    type: count
+  }
+
+  drill_fields:   [campaign.campaign_name,ad_group.ad_group_name,description,display_url]
 }
