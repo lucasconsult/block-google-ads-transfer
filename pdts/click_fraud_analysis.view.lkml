@@ -338,6 +338,7 @@ view: clicks_fraud_analysis {
 
   measure: lower_bound {
     label: "Prediction Lower Bound"
+    description: "Lowest number allowed within bounds"
     type: sum
     sql: ${prediction_interval_lower_bound} ;;
     value_format_name: decimal_0
@@ -345,6 +346,7 @@ view: clicks_fraud_analysis {
 
   measure: upper_bound {
     label: "Prediction Upper Bound"
+    description: "Highest number allowed within bounds"
     type: sum
     sql: ${prediction_interval_upper_bound} ;;
     value_format_name: decimal_0
@@ -352,12 +354,14 @@ view: clicks_fraud_analysis {
 
 
   measure: total_clicks_forecasted {
+    description: "Forecasted clicks by ARIMA"
     type: number
     sql: nullif(sum(${forecast_value}),0);;
     value_format_name: decimal_0
   }
 
   measure: total_clicks_history {
+    description: "Actual Clicks"
     type: number
     sql: nullif(sum(${history_value}),0) ;;
     value_format_name: decimal_0
@@ -370,7 +374,8 @@ view: clicks_fraud_analysis {
     }
   }
 
-  measure: is_in_prediction_interval {
+  measure: is_out_of_bounds {
+    description: "The clicks for this day are outside of the ARIMA predicution boundries ( 80% confidence level ) "
     type: yesno
     sql: ${clicks_fraud_analysis.total_clicks_history} >=
     ${clicks_fraud_analysis.lower_bound} AND
