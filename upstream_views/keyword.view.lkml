@@ -122,6 +122,10 @@ view: keyword {
     description: "keyword name"
     type: string
     sql: ${TABLE}.Criteria ;;
+    link: {
+      label: "Manage this keyword"
+      url: "https://ads.google.com/aw/keywords?ocid={{ keyword.criterion_id._value}}"
+    }
   }
 
   dimension: criteria_destination_url {

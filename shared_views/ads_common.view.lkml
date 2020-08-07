@@ -39,7 +39,7 @@ view: ads_common {
               {% else %} Drill Dashboard Not Implemented
               {% endcase %}"
       url:  "{% case  drill_by._parameter_value %}
-               {% when \"'campaign'\" %} /dashboards-next/block_google_ads_transfer_v2::campaign_details?CampaignID={{ campaign.campaign_id._value }}&Period={{ fact.period._parameter_value | replace: \"'\", '' | url_encode }}
+               {% when \"'campaign'\" %} /dashboards/block_google_ads_transfer_v2::campaign_details_lookup?CampaignName={{ value }}&Period={{ fact.period._parameter_value | replace: \"'\", '' | url_encode }}
               {% else %} https://github.com/looker/block-google-ads-transfer-v2/issues
               {% endcase %}"
       ##TODO - all objects##

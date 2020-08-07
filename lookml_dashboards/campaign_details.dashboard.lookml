@@ -1,6 +1,7 @@
-- dashboard: campaign_details
-  title: 'Campaign Details Lookup'
+- dashboard: campaign_details_lookup
+  title: Campaign Details Lookup
   layout: newspaper
+  preferred_viewer: dashboards-next
   elements:
   - title: Start Date
     name: Start Date
@@ -31,7 +32,7 @@
     note_text: The date the campaign was initially started. Name Changes of the campaign
       are not taken into account.
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
       Period: fact.period
     row: 0
     col: 9
@@ -64,7 +65,7 @@
     note_display: hover
     note_text: The current name of the campaign.
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
       Period: fact.period
     row: 0
     col: 0
@@ -78,7 +79,6 @@
     fields: [campaign.campaign_status]
     filters:
       fact.date_period_latest: 'yes'
-      campaign.campaign_name: NA - BI Tools
     sorts: [campaign.campaign_status]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -100,7 +100,7 @@
       Current status of your campaign.
       Active, Enabled, Removed, Deleted
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
       Period: fact.period
     row: 0
     col: 14
@@ -115,7 +115,6 @@
     fill_fields: [campaign.end_date]
     filters:
       fact.date_period_latest: 'yes'
-      campaign.campaign_name: NA - BI Tools
     sorts: [campaign.end_date desc]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -135,7 +134,7 @@
     note_display: hover
     note_text: End Date in case an end date for the campaign was set.
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
       Period: fact.period
     row: 0
     col: 19
@@ -201,7 +200,7 @@
     note_text: You see how much your Budget is (blue) vs. how much you actually spend
       (red)
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
       Period: fact.period
     row: 5
     col: 8
@@ -235,7 +234,7 @@
     note_display: hover
     note_text: 'Current daily budget you have set for your campaign. '
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
       Period: fact.period
     row: 5
     col: 0
@@ -273,7 +272,7 @@
     note_text: Number of clicks your Ads of the current Campaign received and how
       this compares to the previous period.
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
       Period: fact.period
     row: 16
     col: 6
@@ -314,7 +313,7 @@
 
       Additionally, the % Change to the previous period is given.
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
       Period: fact.period
     row: 16
     col: 12
@@ -356,7 +355,7 @@
     note_text: Current Impressions (how many times your ads were shown) for your campaign
       and % Change to previous period.
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
       Period: fact.period
     row: 16
     col: 0
@@ -396,7 +395,7 @@
 
       You are given ROAS and the % Change to the previous period.
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
       Period: fact.period
     row: 16
     col: 18
@@ -429,18 +428,16 @@
     note_display: hover
     note_text: Overall cost spent on the campaign so far.
     listen:
-      CampaignID: fact.campaign_id
+      CampaignName: campaign.campaign_name
     row: 5
     col: 4
     width: 4
     height: 3
-  - name: <h1 style="font-size:30px"><center>Monetary KPIs</center></h1>
+  - name: Monetary KPI
     type: text
-    title_text: <h1 style="font-size:30px"><center>Monetary KPIs</center></h1>
+    title_text: <font color="#34A853" size="45" weight="bold"><i class="fa fa-money" aria-hidden="true"></i><strong>Monetary KPIs </strong>
     subtitle_text: ''
-    body_text: <h1 style="color:rgb(66,133,244); font-size:20px"><center>Cost vs.
-      Budget information in regards to your current campaign as well as information
-      for all campaigns</center></h1>
+    body_text: <center>Cost vs. Budget information in regards to your current campaign as well as information for all campaigns</center>
     row: 2
     col: 0
     width: 24
@@ -463,7 +460,6 @@
     fields: [campaign.campaign_comparitor, budget.Current_Budget]
     pivots: [campaign.campaign_comparitor]
     filters:
-      campaign.campaign_selector: NA - BI Tools
       fact.period: 28 day
       fact.date_period_latest: 'Yes'
     sorts: [campaign.campaign_comparitor]
@@ -486,7 +482,7 @@
     trellis: ''
     stacking: ''
     limit_displayed_rows: false
-    legend_position: center
+    legend_position: right
     point_style: none
     show_value_labels: true
     label_density: 25
@@ -506,6 +502,7 @@
     series_colors:
       Rest of Campaigns - budget.Current_Budget: "#999"
     column_spacing_ratio: 0.6
+    show_dropoff: false
     custom_color_enabled: true
     show_single_value_title: true
     show_comparison: false
@@ -520,7 +517,8 @@
     note_display: hover
     note_text: 'Your Current Campaign Budget vs. the average of all other campaigns
       will tell you whether this is a high priority Campaign or not. '
-    listen: {}
+    listen:
+      CampaignName: campaign.campaign_selector
     row: 8
     col: 0
     width: 8
@@ -532,11 +530,7 @@
     type: looker_grid
     fields: [fact.total_impressions, fact.total_clicks, ad_group.ad_group_name, fact.average_click_rate]
     filters:
-      fact.period: 28 day
       fact.date_period_latest: 'Yes'
-      fact.drill_by: campaign
-      ad_group.ad_group_name: ''
-      campaign.campaign_id: '716662761'
     sorts: [fact.total_impressions desc]
     limit: 500
     column_limit: 50
@@ -648,7 +642,9 @@
     note_display: hover
     note_text: KPIs by your Ad Groups to see which Ad Groups are performing better
       and which ones may need optimisation.
-    listen: {}
+    listen:
+      CampaignName: campaign.campaign_name
+      Period: fact.period
     row: 32
     col: 0
     width: 12
@@ -660,11 +656,7 @@
     type: looker_grid
     fields: [fact.total_impressions, fact.total_clicks, keyword.criteria, fact.average_click_rate]
     filters:
-      fact.period: 28 day
       fact.date_period_latest: 'Yes'
-      fact.drill_by: campaign
-      ad_group.ad_group_name: ''
-      campaign.campaign_id: '716662761'
     sorts: [fact.total_impressions desc]
     limit: 20
     column_limit: 50
@@ -782,7 +774,9 @@
       sorting only on Clicks and Impressions since single search terms that generate
       a Click will result in 100% Click Through Rate but are not relevant due to the
       low number of searches.
-    listen: {}
+    listen:
+      CampaignName: campaign.campaign_name
+      Period: fact.period
     row: 32
     col: 12
     width: 12
@@ -807,9 +801,7 @@
       fact.average_value_per_cost]
     fill_fields: [fact.date_date]
     filters:
-      fact.period: 28 day
       fact.date_period_latest: 'yes'
-      fact.campaign_id: '716662761'
     sorts: [fact.date_date desc]
     limit: 500
     column_limit: 50
@@ -867,16 +859,18 @@
     note_state: collapsed
     note_display: above
     note_text: You can click on any measure in the "Legend" to hide it from view.
-    listen: {}
+    listen:
+      CampaignName: campaign.campaign_name
+      Period: fact.period
     row: 20
     col: 0
     width: 24
     height: 9
   filters:
-  - name: CampaignID
-    title: CampaignID
+  - name: CampaignName
+    title: CampaignName
     type: field_filter
-    default_value: '716662761'
+    default_value: NA - Brand | 141863126
     allow_multiple_values: true
     required: false
     ui_config:
@@ -886,7 +880,7 @@
     model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     listens_to_filters: []
-    field: fact.campaign_id
+    field: campaign.campaign_name
   - name: Period
     title: Period
     type: field_filter

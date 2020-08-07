@@ -125,10 +125,10 @@ view: campaign {
     drill_fields: [ad_group.ad_group_name]
     alias: [name]
     type: string
-    sql: ${TABLE}.CampaignName ;;
+    sql: concat(${TABLE}.CampaignName, ' | ', ${campaign_id}) ;;
     link: {
       label: "See {{value}} Detail Dashboard"
-      url: "/dashboards-next/block_google_ads_transfer_v2::campaign_details?CampaignID={{ campaign.campaign_id._value }}&Period={{ fact.period._parameter_value | replace: \"'\", '' | url_encode }}"
+      url: "/dashboards/block_google_ads_transfer_v2::campaign_details_lookup?CampaignName={{ value }}&Period={{ fact.period._parameter_value | replace: \"'\", '' | url_encode }}"
     }
   }
 
