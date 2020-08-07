@@ -339,16 +339,16 @@ view: click_fraud_analysis {
   measure: lower_bound {
     label: "Prediction Lower Bound"
     description: "Lowest number allowed within bounds"
-    type: sum
-    sql: ${prediction_interval_lower_bound} ;;
+    type: max
+    sql: nullif(${prediction_interval_lower_bound},0) ;;
     value_format_name: decimal_0
   }
 
   measure: upper_bound {
     label: "Prediction Upper Bound"
     description: "Highest number allowed within bounds"
-    type: sum
-    sql: ${prediction_interval_upper_bound} ;;
+    type: max
+    sql: nullif(${prediction_interval_upper_bound},0) ;;
     value_format_name: decimal_0
   }
 
