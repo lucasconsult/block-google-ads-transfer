@@ -25,6 +25,11 @@ view: timeseries_training_data {
         field: fact.date_date
         value: "364 days ago for 363 days"
       }
+
+      filters: {
+        field: fact.date_period_latest
+        value: "Yes"
+      }
     }
   }
   dimension: date {
