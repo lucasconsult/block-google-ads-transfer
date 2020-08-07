@@ -122,7 +122,9 @@ measure: bu_amount {
     type: average
     value_format_name: large_usd
   filters: [latest: "yes"]
-    sql: ${amount} ;;
+    sql: ${amount}
+    ;;
+    drill_fields: [budetails*]
   }
 
 
@@ -130,4 +132,7 @@ measure: bu_amount {
     type: count
     drill_fields: [account_descriptive_name, budget_name]
   }
+set: budetails {
+  fields: [campaign.campaign_name, campaign.advertising_channel_type, Current_Budget]
+}
 }
