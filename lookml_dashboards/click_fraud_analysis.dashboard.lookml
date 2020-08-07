@@ -1,5 +1,5 @@
-- dashboard: clicks_fraud_analysis
-  title: Clicks Fraud Analysis
+- dashboard: click_fraud_analysis
+  title: Click Fraud Analysis
   layout: newspaper
   preferred_viewer: dashboards-next
   elements:

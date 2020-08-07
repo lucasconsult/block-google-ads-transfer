@@ -363,9 +363,9 @@ view: clicks_fraud_analysis {
     value_format_name: decimal_0
 
     link: {
-      label: "Clicks Fraud Analysis"
+      label: "Click Fraud Analysis"
       icon_url: "https://www.google.com/s2/favicons?domain=www.ads.google.com"
-      url: "/dashboards-next/block_google_ads_transfer_v2::clicks_fraud_analysis?Date={{timestamp_date._value | url_encode}}
+      url: "/dashboards/block_google_ads_transfer_v2::click_fraud_analysis?Date={{timestamp_date._value | url_encode}}
         &Comparaisons%20Dates={{timestamp_date._value | url_encode}}%20-%207%20days%2C%20{{timestamp_date._value | url_encode}}%20-%201%20day%2C%20{{timestamp_date._value | url_encode}}"
     }
   }
