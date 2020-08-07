@@ -5,7 +5,6 @@
   elements:
   - title: Account
     name: Account
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: looker_waterfall
     fields: [budget.account_descriptive_name, fact.total_clicks]
@@ -53,7 +52,6 @@
     height: 6
   - title: Campaigns
     name: Campaigns
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: looker_waterfall
     fields: [fact.total_clicks, campaign.campaign_name]
@@ -102,7 +100,6 @@
     height: 7
   - title: Ad Group
     name: Ad Group
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: looker_waterfall
     fields: [fact.total_clicks, ad_group.ad_group_name]
@@ -151,7 +148,6 @@
     height: 6
   - title: Top 10 Keywords
     name: Top 10 Keywords
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: looker_waterfall
     fields: [fact.total_clicks, keyword.criteria]
@@ -226,7 +222,6 @@
     height: 2
   - title: Clicks Comparaison
     name: Clicks Comparaison
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: looker_bar
     fields: [fact.date_date, fact.total_clicks]
