@@ -34,8 +34,15 @@ view: ads_common {
       {% endcase %} ;;
       drill_fields: [customer.account_descriptive_name,campaign.campaign_name,ad_group.ad_group_name,ad.description,keyword.criteria]
     link: {
-      label: "See {{value}} Detail Dashboard"
-      url: "/dashboards-next/765?CampaignID={{ campaign.campaign_id._value }}&Period={{ fact.period._parameter_value | replace: \"'\", '' | url_encode }}"
+      label: "{% case  drill_by._parameter_value %}
+                {% when \"'campaign'\" %} See {{value}} Detail Dashboard
+              {% else %} Drill Dashboard Not Implemented
+              {% endcase %}"
+      url:  "{% case  drill_by._parameter_value %}
+               {% when \"'campaign'\" %} /dashboards-next/block_google_ads_transfer_v2::campaign_details?CampaignID={{ campaign.campaign_id._value }}&Period={{ fact.period._parameter_value | replace: \"'\", '' | url_encode }}
+              {% else %} https://github.com/looker/block-google-ads-transfer-v2/issues
+              {% endcase %}"
+      ##TODO - all objects##
     }
   }
 

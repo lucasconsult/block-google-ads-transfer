@@ -3,7 +3,7 @@ connection: "@{CONNECTION_NAME}"
 include: "upstream_views/*"
 include: "pdts/*"
 #include: "lookml_dashboards/*"
-include: "lookml_dashboards/google_ads_pulse.dashboard"
+include: "lookml_dashboards/*"
 
 datagroup: daily {
   sql_trigger: SELECT current_date ;;
