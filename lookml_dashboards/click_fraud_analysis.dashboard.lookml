@@ -194,9 +194,10 @@
     col: 0
     width: 12
     height: 7
-  - name: "<strong>Clicks Fraud Analysis</strong>"
+  - name: "<strong>Click Fraud Analysis</strong>"
     type: text
-    title_text: "<strong>Clicks Fraud Analysis</strong>"
+    title_text: "<strong>Click Fraud Analysis</strong>"
+    subtitle_text: "(Use this dashboard as a drill down from a possible click fraud alert)"
     row: 0
     col: 0
     width: 24

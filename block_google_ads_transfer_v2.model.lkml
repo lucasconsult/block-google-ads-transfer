@@ -97,6 +97,6 @@ join: budget {
 }
 }
 
-explore: clicks_fraud_analysis {
+explore: click_fraud_analysis {
   description: "Clicks forecast and fraud analysis"
 }

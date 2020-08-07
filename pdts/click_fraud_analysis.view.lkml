@@ -259,7 +259,7 @@ view: arima_forecast {
 #
 #
 
-view: clicks_fraud_analysis {
+view: click_fraud_analysis {
   derived_table: {
     datagroup_trigger: daily
     sql:
@@ -377,10 +377,9 @@ view: clicks_fraud_analysis {
   measure: is_out_of_bounds {
     description: "The clicks for this day are outside of the ARIMA predicution boundries ( 80% confidence level ) "
     type: yesno
-    sql: ${clicks_fraud_analysis.total_clicks_history} >=
-    ${clicks_fraud_analysis.lower_bound} AND
-    ${clicks_fraud_analysis.total_clicks_history} <= ${clicks_fraud_analysis.upper_bound}
- ;;
+    sql: ${click_fraud_analysis.total_clicks_history} >=
+    ${click_fraud_analysis.lower_bound} AND
+    ${click_fraud_analysis.total_clicks_history} <= ${click_fraud_analysis.upper_bound} ;;
   }
 
 
