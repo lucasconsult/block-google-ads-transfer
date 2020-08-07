@@ -356,6 +356,16 @@ view: clicks_fraud_analysis {
     type: number
     sql: nullif(sum(${history_value}),0) ;;
     value_format_name: decimal_0
+
+    link: {
+      label: "Fraud Analysis"
+      icon_url: "https://www.google.com/s2/favicons?domain=www.ads.google.com"
+      url: "/dashboards/767?Date={{timestamp_date._value  | url_encode}}
+        &Comparaisons%20Dates=
+        {{timestamp_date._value | url_encode}}%20-%207%20days%2C%20
+        {{timestamp_date._value | url_encode}}%20-%201%20day%2C%20
+        {{timestamp_date._value | url_encode}}"
+    }
   }
 
   measure: is_in_prediction_interval {
