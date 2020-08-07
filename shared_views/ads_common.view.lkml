@@ -35,7 +35,7 @@ view: ads_common {
       drill_fields: [customer.account_descriptive_name,campaign.campaign_name,ad_group.ad_group_name,ad.description,keyword.criteria]
     link: {
       label: "See {{value}} Detail Dashboard"
-      url: "/dashboards-next/761?Campaign={{value}}"
+      url: "/dashboards-next/765?CampaignID={{ campaign.campaign_id._value }}&Period={{ fact.period._parameter_value | replace: \"'\", '' | url_encode }}"
     }
   }
 

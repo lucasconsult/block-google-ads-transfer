@@ -128,7 +128,7 @@ view: campaign {
     sql: ${TABLE}.CampaignName ;;
     link: {
       label: "See {{value}} Detail Dashboard"
-      url: "/dashboards-next/761?Campaign={{value}}"
+      url: "/dashboards-next/765?CampaignID={{ campaign.campaign_id._value }}&Period={{ ad_basic_stats.period._value }}"
     }
   }
 
