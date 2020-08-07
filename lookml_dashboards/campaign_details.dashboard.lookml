@@ -5,7 +5,6 @@
   elements:
   - title: Start Date
     name: Start Date
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: single_value
     fields: [campaign.start_date]
@@ -40,7 +39,6 @@
     height: 2
   - title: Campaign
     name: Campaign
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: single_value
     fields: [campaign.campaign_name]
