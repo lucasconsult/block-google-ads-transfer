@@ -5,7 +5,6 @@
   elements:
   - title: Spend
     name: Spend
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.total_cost, last_fact.total_cost]
@@ -65,7 +64,6 @@
     height: 4
   - title: Conversions
     name: Conversions
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.total_conversions, last_fact.total_conversions]
@@ -158,7 +156,6 @@
     height: 4
   - title: Impressions
     name: Impressions
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.total_impressions, last_fact.total_impressions]
@@ -226,7 +223,6 @@
     height: 4
   - title: Clicks
     name: Clicks
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.total_clicks, last_fact.total_clicks]
@@ -293,7 +289,6 @@
     height: 4
   - title: Click Through Rate (CTR)
     name: Click Through Rate (CTR)
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.average_click_rate, last_fact.average_click_rate]
@@ -363,7 +358,6 @@
     height: 4
   - title: Cost per Click (CPC)
     name: Cost per Click (CPC)
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.average_cost_per_click, last_fact.average_cost_per_click]
@@ -431,7 +425,6 @@
     height: 4
   - title: Impressions (copy)
     name: Impressions (copy)
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: looker_line
     fields: [fact.total_impressions, fact.date_date, fact.total_clicks]
@@ -506,7 +499,6 @@
     height: 6
   - title: Impressions (copy 2)
     name: Impressions (copy 2)
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: looker_line
     fields: [fact.date_date, fact.average_click_rate, fact.average_cost_per_click]
@@ -582,7 +574,6 @@
     height: 6
   - title: ROAS
     name: ROAS
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.average_value_per_cost, last_fact.average_value_per_cost]
@@ -646,7 +637,6 @@
     height: 4
   - title: Conversion Value
     name: Conversion Value
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.total_conversionvalue, last_fact.total_conversionvalue]
@@ -715,7 +705,6 @@
     ui_config:
       type: button_toggles
       display: popover
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     listens_to_filters: []
     field: fact.period
@@ -728,7 +717,6 @@
     ui_config:
       type: radio_buttons
       display: inline
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     listens_to_filters: []
     field: fact.drill_by
@@ -741,7 +729,6 @@
     ui_config:
       type: tag_list
       display: popover
-    model: block_google_ads_transfer_v2
     explore: ad_basic_stats
     listens_to_filters: []
     field: ad_group.ad_group_name
