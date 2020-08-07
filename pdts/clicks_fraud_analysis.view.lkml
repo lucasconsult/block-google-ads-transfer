@@ -2,7 +2,7 @@
 # This example use ARIMA as part of BigQeury ML Timeseries Forecasting
 
 
-# 1. Training data for ARIMA MODEL, generated for the main explore "Ad Basic State"
+# 1. Training data for ARIMA MODEL, generated for the main explore "Ad Basic Stats"
 # and will serve as input to the training the forecast model
 #
 # We're using a full complete year of data minus one day to train de model that could be regenerated
@@ -363,13 +363,10 @@ view: clicks_fraud_analysis {
     value_format_name: decimal_0
 
     link: {
-      label: "Fraud Analysis"
+      label: "Clicks Fraud Analysis"
       icon_url: "https://www.google.com/s2/favicons?domain=www.ads.google.com"
-      url: "/dashboards/767?Date={{timestamp_date._value  | url_encode}}
-        &Comparaisons%20Dates=
-        {{timestamp_date._value | url_encode}}%20-%207%20days%2C%20
-        {{timestamp_date._value | url_encode}}%20-%201%20day%2C%20
-        {{timestamp_date._value | url_encode}}"
+      url: "/dashboards-next/block_google_ads_transfer_v2::clicks_fraud_analysis?Date={{timestamp_date._value | url_encode}}
+        &Comparaisons%20Dates={{timestamp_date._value | url_encode}}%20-%207%20days%2C%20{{timestamp_date._value | url_encode}}%20-%201%20day%2C%20{{timestamp_date._value | url_encode}}"
     }
   }
 
