@@ -53,7 +53,7 @@ The schema documentation for Google Ads can be found in [Google's docs](https://
 
 Utilizing BigQuery Machine Learning (BQML) and Autoregressive integrated moving average ([ARIMA](https://towardsdatascience.com/how-to-do-time-series-forecasting-in-bigquery-af9eb6be8159)) analysis, the last year's click data is analyzed and patterns are predicted for the following 30 days, allowing you to see irregularities in traffic patterns. The _click_fraud_analysis.view_ file contains embedded documentation about the use case as well as the _Click Analysis Dashboard_
 
-https://www.google.com/ads/adtrafficquality
+**Note, this functionality is for demo purposes only** Read more about Ad Traffic Quality [here](https://www.google.com/ads/adtrafficquality)
 
 ### What if I find an error? Suggestions for improvements?
 
