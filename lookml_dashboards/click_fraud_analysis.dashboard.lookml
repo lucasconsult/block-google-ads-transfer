@@ -278,7 +278,6 @@
     height: 5
   - title: Click Predictions
     name: Click Predictions
-
     explore: click_fraud_analysis
     type: looker_line
     fields: [click_fraud_analysis.timestamp_date, click_fraud_analysis.lower_bound,
@@ -289,14 +288,26 @@
       click_fraud_analysis.timestamp_date: 60 days ago for 90 days
     sorts: [click_fraud_analysis.timestamp_date desc]
     limit: 500
-    dynamic_fields: [{table_calculation: is_outside_bounds, label: is_outside_bounds,
-        expression: "if(${click_fraud_analysis.total_clicks_history} < ${click_fraud_analysis.lower_bound}\
-          \ OR ${click_fraud_analysis.total_clicks_history} > ${click_fraud_analysis.upper_bound}\
-          \ \n  OR add_days(-1,trunc_days(now())) = ${click_fraud_analysis.timestamp_date},\
-          \ # this bit added for demo\n  1,null)", value_format: !!null '', value_format_name: !!null '',
-        _kind_hint: measure, _type_hint: number, is_disabled: true}, {table_calculation: calculation_2,
-        label: Calculation 2, expression: 'trunc_days(add_days(-1,now()))', value_format: !!null '',
-        value_format_name: !!null '', _kind_hint: dimension, _type_hint: date, is_disabled: true}]
+    dynamic_fields:
+    - table_calculation: is_outside_bounds
+      label: is_outside_bounds
+      expression: "if(${click_fraud_analysis.total_clicks_history} < ${click_fraud_analysis.lower_bound}\
+        \ OR ${click_fraud_analysis.total_clicks_history} > ${click_fraud_analysis.upper_bound}\
+        \ \n  OR add_days(-1,trunc_days(now())) = ${click_fraud_analysis.timestamp_date},\
+        \ # this bit added for demo\n  1,null)"
+      value_format:
+      value_format_name:
+      _kind_hint: measure
+      _type_hint: number
+      is_disabled: true
+    - table_calculation: calculation_2
+      label: Calculation 2
+      expression: trunc_days(add_days(-1,now()))
+      value_format:
+      value_format_name:
+      _kind_hint: dimension
+      _type_hint: date
+      is_disabled: true
     query_timezone: UTC
     x_axis_gridlines: false
     y_axis_gridlines: false
@@ -323,16 +334,12 @@
     show_null_points: false
     interpolation: linear
     y_axes: [{label: '', orientation: left, series: [{axisId: click_fraud_analysis.lower_bound,
-            id: click_fraud_analysis.lower_bound, name: Prediction Lower Bound}, {
-            axisId: click_fraud_analysis.upper_bound, id: click_fraud_analysis.upper_bound,
-            name: Prediction Upper Bound}, {axisId: click_fraud_analysis.total_clicks_forecasted,
+            id: click_fraud_analysis.lower_bound, name: Prediction Lower Bound}, {axisId: click_fraud_analysis.upper_bound,
+            id: click_fraud_analysis.upper_bound, name: Prediction Upper Bound}, {axisId: click_fraud_analysis.total_clicks_forecasted,
             id: click_fraud_analysis.total_clicks_forecasted, name: Total Clicks Forecasted},
           {axisId: click_fraud_analysis.total_clicks_history, id: click_fraud_analysis.total_clicks_history,
-            name: Total Clicks History}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 57, type: linear}, {label: !!null '',
-        orientation: right, series: [{axisId: is_outside_bounds, id: is_outside_bounds,
-            name: is_outside_bounds}], showLabels: false, showValues: false, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: linear}]
+            name: Total Clicks History}], showLabels: true, showValues: false, unpinAxis: false,
+        tickDensity: default, tickDensityCustom: 57, type: linear}]
     size_by_field: ''
     hidden_series: []
     series_types:
@@ -366,14 +373,15 @@
     defaults_version: 1
     note_state: collapsed
     note_display: above
-    note_text: Using ARIMA forecasting model, looking back at 365 days of data to
-      create normal lower and upper bounds. If clicks fall outside of this norm, they
-      should be investigated
+    note_text: Using ARIMA forecasting model, looking back at 365 days of data to create
+      normal lower and upper bounds. If clicks fall outside of this norm, they should
+      be investigated
     listen: {}
     row: 2
     col: 0
     width: 24
     height: 8
+
   filters:
   - name: Date
     title: Date
