@@ -1,4 +1,13 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/ads_common.view.lkml"
+
+
 view: ads_common {
+  extends: [ads_common_config]
+}
+
+###################################################
+
+view: ads_common_core {
   extension: required
 
 

@@ -1,4 +1,15 @@
+include: /shared_views/*
+
+include: "//@{CONFIG_PROJECT_NAME}/views/budget.view.lkml"
+
+
 view: budget {
+  extends: [budget_config]
+}
+
+###################################################
+
+view: budget_core {
   sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Budget_@{GOOGLE_ADS_CUSTOMER_ID}`
     ;;
 

@@ -3,7 +3,7 @@
   "category_label": "Models",
   "branding": {
     "image_uri": "https://marketplace-api.looker.com/block-icons/google_icon.png",
-    "tagline": "Dig into campaigns and keywords, optimize spend and allocation, and maximize channel ROI for Google Ads."
+    "tagline": "Expand your insights by joining in external datasets, simplifying complex account hierarchies and streamlining currency data with the Looker Block for Google Ads."
   },
 
   "constants": {
@@ -23,14 +23,14 @@
   },
   "models": [
     {
-      "name": "block_google_ads_transfer",
+      "name": "block_google_ads_transfer_new",
       "connection_constant": "CONNECTION_NAME"
     }
   ],
   "auxiliary_projects": [
     {
-      "git_uri": "git://github.com/looker/block-google-ads-transfer-config.git",
-      "git_ref": "4394ef5d115264fd119e072008c65011d653142f",
+      "git_uri": "git://github.com/looker/block-google-ads-transfer-v2-config.git",
+      "git_ref": "",
       "label": "Google Ads Config",
       "constant_name": "CONFIG_PROJECT_NAME"
     }

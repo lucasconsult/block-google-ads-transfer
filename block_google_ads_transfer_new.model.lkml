@@ -5,6 +5,10 @@ include: "pdts/*"
 #include: "lookml_dashboards/*"
 include: "lookml_dashboards/*"
 
+include: "//@{CONFIG_PROJECT_NAME}/views/*.view.lkml"
+include: "//@{CONFIG_PROJECT_NAME}/*.model.lkml"
+include: "//@{CONFIG_PROJECT_NAME}/*.dashboard"
+
 datagroup: daily {
   sql_trigger: SELECT current_date ;;
   max_cache_age: "24 hours"
@@ -12,7 +16,14 @@ datagroup: daily {
 named_value_format: large_number { value_format: "[>=1000000]0.00,,\"M\";[>=1000]0.00,\"K\";0"}
 named_value_format: large_usd { value_format: "[>=1000000]$0.00,,\"M\";[>=1000]$0.00,\"K\";$0.00" }
 
+
+
 explore: ad_basic_stats {
+  extends: [ad_basic_stats_config]
+}
+
+explore: ad_basic_stats_core {
+  extension: required
   view_label: "Ad Performance (Current Period)"
   description: "Ad Performance including Ad Groups, Keywords and Campaigns"
   view_name: fact
@@ -97,6 +108,7 @@ join: budget {
 }
 }
 
-explore: clicks_fraud_analysis {
+explore: clicks_fraud_analysis_core {
   description: "Clicks forecast and fraud analysis"
+  extension: required
 }

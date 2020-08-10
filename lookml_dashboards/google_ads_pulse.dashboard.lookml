@@ -1,7 +1,7 @@
 - dashboard: google_ads_pulse
   title: Google Ads Pulse
   layout: newspaper
-  preferred_viewer: dashboards-next
+  preferred_viewer: dashboards
   elements:
   - title: Spend
     name: Spend
