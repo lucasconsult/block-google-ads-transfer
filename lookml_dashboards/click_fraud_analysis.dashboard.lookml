@@ -297,7 +297,7 @@
         _kind_hint: measure, _type_hint: number, is_disabled: true}, {table_calculation: calculation_2,
         label: Calculation 2, expression: 'trunc_days(add_days(-1,now()))', value_format: !!null '',
         value_format_name: !!null '', _kind_hint: dimension, _type_hint: date, is_disabled: true}]
-    query_timezone: America/Los_Angeles
+    query_timezone: UTC
     x_axis_gridlines: false
     y_axis_gridlines: false
     show_view_names: false
