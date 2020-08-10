@@ -1,8 +1,6 @@
 connection: "@{CONNECTION_NAME}"
 
 include: "upstream_views/*"
-include: "pdts/*"
-#include: "lookml_dashboards/*"
 include: "lookml_dashboards/*"
 
 include: "//@{CONFIG_PROJECT_NAME}/views/*.view.lkml"
@@ -106,9 +104,4 @@ join: budget {
   sql_on: ${campaign.budget_id}=${budget.budget_id} AND  ${budget._data_date} = ${fact._data_date} ;;
   relationship: many_to_one
 }
-}
-
-explore: clicks_fraud_analysis_core {
-  description: "Clicks forecast and fraud analysis"
-  extension: required
 }
