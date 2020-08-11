@@ -1,17 +1,17 @@
 # project_name: "block-google-ads-transfer"
 
 constant: CONNECTION_NAME {
-  value: "looker_application"
+  value: ""
   export: override_required
 }
 
 constant: GOOGLE_ADS_SCHEMA {
-  value: "bigquery-connectors.adwords_v201609"
+  value: ""
   export: override_required
 }
 
 constant: GOOGLE_ADS_CUSTOMER_ID {
-  value: "6747157124"
+  value: ""
   export: override_required
 }
 
