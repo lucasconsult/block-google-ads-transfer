@@ -21,6 +21,7 @@ explore: ad_basic_stats {
 }
 
 explore: ad_basic_stats_core {
+  group_label: "Block Google Ads"
   extension: required
   view_label: "Ad Performance (Current Period)"
   description: "Ad Performance including Ad Groups, Keywords and Campaigns"
