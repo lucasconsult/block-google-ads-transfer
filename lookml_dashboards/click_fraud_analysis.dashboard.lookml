@@ -225,8 +225,8 @@
     col: 0
     width: 24
     height: 2
-  - title: Clicks Comparaison
-    name: Clicks Comparaison
+  - title: Clicks Comparison
+    name: Clicks Comparison
 
     explore: ad_basic_stats
     type: looker_bar
@@ -271,7 +271,7 @@
     interpolation: linear
     defaults_version: 1
     listen:
-      Comparaisons Dates: fact.date_date
+      Comparison Dates: fact.date_date
     row: 10
     col: 9
     width: 15
@@ -392,8 +392,8 @@
     ui_config:
       type: advanced
       display: popover
-  - name: Comparaisons Dates
-    title: Comparaisons Dates
+  - name: Comparison Dates
+    title: Comparison Dates
     type: date_filter
     default_value: yesterday, 2 days ago, 7 days ago
     allow_multiple_values: true
