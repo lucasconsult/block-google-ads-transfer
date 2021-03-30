@@ -1,7 +1,7 @@
 - dashboard: campaign_details_lookup
   title: Campaign Details Lookup
   layout: newspaper
-  preferred_viewer: dashboards
+  preferred_viewer: dashboards-next
   elements:
   - title: Start Date
     name: Start Date
