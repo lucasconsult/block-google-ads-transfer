@@ -54,7 +54,3 @@ The schema documentation for Google Ads can be found in [Google's docs](https://
 Utilizing BigQuery Machine Learning (BQML) and Autoregressive integrated moving average ([ARIMA](https://towardsdatascience.com/how-to-do-time-series-forecasting-in-bigquery-af9eb6be8159)) analysis, the last year's click data is analyzed and patterns are predicted for the following 30 days, allowing you to see irregularities in traffic patterns. The _click_fraud_analysis.view_ file contains embedded documentation about the use case as well as the _Click Analysis Dashboard_
 
 **Note, this functionality is for demo purposes only** Read more about Ad Traffic Quality [here](https://www.google.com/ads/adtrafficquality)
-
-### What if I find an error? Suggestions for improvements?
-
-Great! Blocks were designed for continuous improvement through the help of the entire Looker community, and we'd love your input. To log an error or improvement recommendation, simply create a "New Issue" in the corresponding [Github repo for this Block](https://github.com/looker/block-google-ads-transfer-v2/issues). Please be as detailed as possible in your explanation, and we'll address it as quick as we can.
