@@ -1,0 +1,39 @@
+{
+  "label": "Google Ads - BQ Transfer",
+  "category_label": "Models",
+  "branding": {
+    "image_uri": "https://marketplace-api.looker.com/block-icons/google_icon.png",
+    "tagline": "Expand your insights by joining in external datasets, simplifying complex account hierarchies and streamlining currency data with the Looker Block for Google Ads.",
+    "badge": "Beta"
+  },
+
+  "constants": {
+    "CONNECTION_NAME": {
+      "label": "Connection Name",
+      "value_constraint": "connection"
+    },
+    "GOOGLE_ADS_SCHEMA": {
+      "label": "Google Ads Schema Name"
+    },
+    "GOOGLE_ADS_CUSTOMER_ID": {
+    "label": "Customer ID from Google Ads"
+    },
+    "CONFIG_PROJECT_NAME": {
+      "label": "Config Project Name"
+    }
+  },
+  "models": [
+    {
+      "name": "block_google_ads_transfer_new",
+      "connection_constant": "CONNECTION_NAME"
+    }
+  ],
+  "auxiliary_projects": [
+    {
+      "git_uri": "git://github.com/looker/block-google-ads-transfer-config.git",
+      "git_ref": "e74586f16759af77d62fff915d0f732e67f53a50",
+      "label": "Google Ads Config",
+      "constant_name": "CONFIG_PROJECT_NAME"
+    }
+  ]
+}
