@@ -1,15 +1,6 @@
 include: /shared_views/*
 
-include: "//@{CONFIG_PROJECT_NAME}/views/customer.view.lkml"
-
-
-view: customer {
-  extends: [customer_config]
-}
-
-###################################################
-
-view: customer_core {
+view: customer{
   sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Customer_@{GOOGLE_ADS_CUSTOMER_ID}` ;;
 
   dimension_group: _data {

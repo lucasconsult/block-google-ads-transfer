@@ -1,13 +1,4 @@
-include: "//@{CONFIG_PROJECT_NAME}/views/ad.view.lkml"
-
-
 view: ad {
-  extends: [ad_config]
-}
-
-###################################################
-
-view: ad_core {
   sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Ad_@{GOOGLE_ADS_CUSTOMER_ID}` ;;
 
   dimension: primary_key {

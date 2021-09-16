@@ -24,16 +24,8 @@
   },
   "models": [
     {
-      "name": "block_google_ads_transfer_new",
+      "name": "block_google_ads_transfer_new_v2",
       "connection_constant": "CONNECTION_NAME"
-    }
-  ],
-  "auxiliary_projects": [
-    {
-      "git_uri": "git://github.com/looker/block-google-ads-transfer-config.git",
-      "git_ref": "e74586f16759af77d62fff915d0f732e67f53a50",
-      "label": "Google Ads Config",
-      "constant_name": "CONFIG_PROJECT_NAME"
     }
   ]
 }

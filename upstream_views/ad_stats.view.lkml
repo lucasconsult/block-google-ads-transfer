@@ -1,15 +1,6 @@
 include: /shared_views/*
 
-include: "//@{CONFIG_PROJECT_NAME}/views/ad_stats.view.lkml"
-
-
 view: ad_stats {
-  extends: [ad_stats_config]
-}
-
-###################################################
-
-view: ad_stats_core {
   sql_table_name: (select *,GENERATE_UUID() as primary_key from `@{GOOGLE_ADS_SCHEMA}.AdStats_@{GOOGLE_ADS_CUSTOMER_ID}` )   ;;
   extends: [ads_common,date_base,period_base]
 

@@ -3,9 +3,8 @@ connection: "@{CONNECTION_NAME}"
 include: "upstream_views/*"
 include: "lookml_dashboards/*"
 
-include: "//@{CONFIG_PROJECT_NAME}/views/*.view.lkml"
-include: "//@{CONFIG_PROJECT_NAME}/*.model.lkml"
-include: "//@{CONFIG_PROJECT_NAME}/*.dashboard"
+include: "/*.model.lkml"
+
 
 datagroup: daily {
   sql_trigger: SELECT current_date ;;
@@ -17,12 +16,7 @@ named_value_format: large_usd { value_format: "[>=1000000]$0.00,,\"M\";[>=1000]$
 
 
 explore: ad_basic_stats {
-  extends: [ad_basic_stats_config]
-}
-
-explore: ad_basic_stats_core {
   group_label: "Block Google Ads"
-  extension: required
   view_label: "Ad Performance (Current Period)"
   description: "Ad Performance including Ad Groups, Keywords and Campaigns"
   view_name: fact

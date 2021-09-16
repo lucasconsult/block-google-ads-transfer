@@ -1,15 +1,6 @@
 include: /shared_views/*
 
-include: "//@{CONFIG_PROJECT_NAME}/views/campaign.view.lkml"
-
-
 view: campaign {
-  extends: [campaign_config]
-}
-
-###################################################
-
-view: campaign_core {
   sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Campaign_@{GOOGLE_ADS_CUSTOMER_ID}` ;;
 
 

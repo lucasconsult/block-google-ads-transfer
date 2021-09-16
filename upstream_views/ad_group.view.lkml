@@ -1,13 +1,4 @@
-include: "//@{CONFIG_PROJECT_NAME}/views/ad_group.view.lkml"
-
-
 view: ad_group {
-  extends: [ad_group_config]
-}
-
-###################################################
-
-view: ad_group_core {
   sql_table_name: `@{GOOGLE_ADS_SCHEMA}.AdGroup_@{GOOGLE_ADS_CUSTOMER_ID}`    ;;
 
 

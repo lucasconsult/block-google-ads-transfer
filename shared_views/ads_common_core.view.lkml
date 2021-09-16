@@ -1,15 +1,5 @@
-include: "//@{CONFIG_PROJECT_NAME}/views/ads_common.view.lkml"
-
-
-view: ads_common {
-  extends: [ads_common_config]
-}
-
-###################################################
-
-view: ads_common_core {
+view: ads_common{
   extension: required
-
 
 # Drill Selector
   parameter: drill_by {

@@ -71,7 +71,7 @@
     height: 2
   - title: Status
     name: Status
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: single_value
     fields: [campaign.campaign_status]
@@ -106,7 +106,7 @@
     height: 2
   - title: " End Date"
     name: " End Date"
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: single_value
     fields: [campaign.end_date]
@@ -140,7 +140,7 @@
     height: 2
   - title: Cost vs Budget
     name: Cost vs Budget
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: looker_line
     fields: [budget.bu_amount, budget._data_date, fact.total_cost]
@@ -206,7 +206,7 @@
     height: 8
   - title: Current Budget
     name: Current Budget
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: single_value
     fields: [budget.Current_Budget]
@@ -240,7 +240,7 @@
     height: 3
   - title: Clicks
     name: Clicks
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.total_clicks, last_fact.total_clicks]
@@ -278,7 +278,7 @@
     height: 4
   - title: Conversion Rate
     name: Conversion Rate
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.average_conversion_rate, last_fact.average_conversion_rate]
@@ -319,7 +319,7 @@
     height: 4
   - title: Impressions
     name: Impressions
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.total_impressions, last_fact.total_impressions]
@@ -361,7 +361,7 @@
     height: 4
   - title: ROAS
     name: ROAS
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.average_value_per_cost, last_fact.average_value_per_cost]
@@ -401,7 +401,7 @@
     height: 4
   - title: Cost to Date
     name: Cost to Date
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: single_value
     fields: [fact.total_cost]
@@ -452,7 +452,7 @@
     height: 3
   - title: Current Campaign Budget vs Others
     name: Current Campaign Budget vs Others
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: looker_column
     fields: [campaign.campaign_comparitor, budget.Current_Budget]
@@ -523,7 +523,7 @@
     height: 5
   - title: Ad Group Details
     name: Ad Group Details
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: looker_grid
     fields: [fact.total_impressions, fact.total_clicks, ad_group.ad_group_name, fact.average_click_rate]
@@ -649,7 +649,7 @@
     height: 11
   - title: Top 20 Keyword Criteria
     name: Top 20 Keyword Criteria
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: looker_grid
     fields: [fact.total_impressions, fact.total_clicks, keyword.criteria, fact.average_click_rate]
@@ -792,7 +792,7 @@
     height: 3
   - title: Campaign Measures Trending
     name: Campaign Measures Trending
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     type: looker_line
     fields: [fact.total_impressions, fact.date_date, fact.total_clicks, fact.average_conversion_rate,
@@ -875,7 +875,7 @@
       type: advanced
       display: popover
       options: []
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     listens_to_filters: []
     field: campaign.campaign_name
@@ -888,7 +888,7 @@
     ui_config:
       type: button_toggles
       display: popover
-    model: block_google_ads_transfer_new
+    model: block_google_ads_transfer_new_v2
     explore: ad_basic_stats
     listens_to_filters: []
     field: fact.period
