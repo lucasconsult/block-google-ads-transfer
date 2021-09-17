@@ -1,19 +1,4 @@
-connection: "@{CONNECTION_NAME}"
-
-include: "upstream_views/*"
-include: "lookml_dashboards/*"
-
-include: "/*.model.lkml"
-
-
-datagroup: daily {
-  sql_trigger: SELECT current_date ;;
-  max_cache_age: "24 hours"
-}
-named_value_format: large_number { value_format: "[>=1000000]0.00,,\"M\";[>=1000]0.00,\"K\";0"}
-named_value_format: large_usd { value_format: "[>=1000000]$0.00,,\"M\";[>=1000]$0.00,\"K\";$0.00" }
-
-
+include: "/views/**/*.view"
 
 explore: ad_basic_stats {
   group_label: "Block Google Ads"
@@ -24,9 +9,9 @@ explore: ad_basic_stats {
 
   conditionally_filter: {
     filters: [
-                fact.period: "28 day",
-                fact.date_period_latest: "Yes"
-              ]
+      fact.period: "28 day",
+      fact.date_period_latest: "Yes"
+    ]
     unless: [fact.date_date]
   }
 
@@ -94,9 +79,9 @@ explore: ad_basic_stats {
       ${campaign.latest};;
     relationship: many_to_one
   }
-join: budget {
-  view_label: "Budget"
-  sql_on: ${campaign.budget_id}=${budget.budget_id} AND  ${budget._data_date} = ${fact._data_date} ;;
-  relationship: many_to_one
-}
+  join: budget {
+    view_label: "Budget"
+    sql_on: ${campaign.budget_id}=${budget.budget_id} AND  ${budget._data_date} = ${fact._data_date} ;;
+    relationship: many_to_one
+  }
 }

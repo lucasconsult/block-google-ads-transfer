@@ -1,4 +1,4 @@
-include: /shared_views/*
+include: /views/shared_views/*
 
 view: customer{
   sql_table_name: `@{GOOGLE_ADS_SCHEMA}.Customer_@{GOOGLE_ADS_CUSTOMER_ID}` ;;

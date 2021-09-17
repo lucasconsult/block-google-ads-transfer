@@ -17,9 +17,6 @@
     },
     "GOOGLE_ADS_CUSTOMER_ID": {
     "label": "Customer ID from Google Ads"
-    },
-    "CONFIG_PROJECT_NAME": {
-      "label": "Config Project Name"
     }
   },
   "models": [
