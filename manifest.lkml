@@ -1,8 +1,7 @@
 # project_name: "block-google-ads-transfer"
 
 constant: CONNECTION_NAME {
-  value: "4mile_bigquery"
-  # value: "connection"
+  value: "connection"
   export: override_required
 }
 
