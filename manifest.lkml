@@ -2,15 +2,15 @@
 
 constant: CONNECTION_NAME {
   value: "connection"
-  export: override_required
+  export: override_optional
 }
 
 constant: GOOGLE_ADS_SCHEMA {
   value: "schema"
-  export: override_required
+  export: override_optional
 }
 
 constant: GOOGLE_ADS_CUSTOMER_ID {
   value: "12345"
-  export: override_required
+  export: override_optional
 }
