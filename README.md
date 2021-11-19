@@ -43,7 +43,9 @@ The schema documentation for Google Ads can be found in [Google's docs](https://
 
 ### Implementation Instructions / Required Customizations
 
-* **Manifest file** - The manifest file contains [constants](https://docs.looker.com/reference/manifest-params/constant) that should be adapted to your BigQuery project and account numbers.
+* **Manifest file** - The manifest file contains [constants](https://docs.looker.com/reference/manifest-params/constant) that should be adapted to your BigQuery project and account numbers. These constants will be set during the installation process initiated on the Marketplace.
+
+* **Refinements** - This block utilizes Refinement files for customization. This method will be required for all customizations/extensions added to this block. For more information on using refinements to customize marketplace blocks, please see [this documentation](https://docs.looker.com/data-modeling/marketplace/customize-blocks).
 
 * **Multiple Accounts** - Union fact and dimension tables if you have multiple accounts. Use a persisted derived table to store the result of the union.
 
