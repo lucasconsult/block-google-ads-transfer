@@ -206,9 +206,9 @@
     col: 0
     width: 24
     height: 2
-  - name: Clicks Camparaison
+  - name: Clicks Comparison
     type: text
-    title_text: Clicks Camparaison
+    title_text: Clicks Comparison
     subtitle_text: ''
     body_text: "Comparison of Number of Clicks between : \nThe **analysis date**,\n\
       The **day before**,\nand **7 days before (same day last week)** <br>\n\n**Explore\
