@@ -123,8 +123,19 @@ view: keyword {
     type: string
     sql: ${TABLE}.Criteria ;;
     link: {
+      icon_url: "https://www.google.com/images/branding/product/ico/googleg_lodp.ico"
+      label: "Google Search"
+      url: "https://www.google.com/search?q={{ value | encode_uri}}"
+    }
+    link: {
       label: "Manage this keyword"
-      url: "https://ads.google.com/aw/keywords?ocid={{ keyword.criterion_id._value}}"
+      icon_url: "https://www.google.com/s2/favicons?domain=www.adwords.google.com"
+      url: "https://ads.google.com/aw/keywords?ocid={{ keyword.CriterionId._value}}"
+    }
+    link: {
+      label: "Pause Keyword"
+      icon_url: "https://www.google.com/s2/favicons?domain=www.adwords.google.com"
+      url: "https://adwords.google.com/aw/ads?keywordId={{ keyword.CriterionId._value | encode_uri }}"
     }
   }
 
