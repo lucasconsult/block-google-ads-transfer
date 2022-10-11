@@ -130,12 +130,12 @@ view: keyword {
     link: {
       label: "Manage this keyword"
       icon_url: "https://www.google.com/s2/favicons?domain=www.adwords.google.com"
-      url: "https://ads.google.com/aw/keywords?ocid={{ keyword.CriterionId._value}}"
+      url: "https://ads.google.com/aw/keywords??keywordId={{ keyword.CriterionId._value}}"
     }
     link: {
       label: "Pause Keyword"
       icon_url: "https://www.google.com/s2/favicons?domain=www.adwords.google.com"
-      url: "https://adwords.google.com/aw/ads?keywordId={{ keyword.CriterionId._value | encode_uri }}"
+      url: "https://ads.google.com/aw/keywords??keywordId={{ keyword.CriterionId._value | encode_uri }}"
     }
   }
 
